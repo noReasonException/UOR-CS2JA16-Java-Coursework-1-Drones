@@ -21,10 +21,14 @@ public class VectorCoreUtils {
         return curr;
     }
     static public List<Double> list3(double x,double y ,double z){
-        ArrayList<Double> retval = new ArrayList<>();
+        List<Double> retval = list2(x,y);
+        retval.add(z);
+        return retval;
+    }
+    static public List<Double> list2(double x,double y){
+        List<Double> retval = new ArrayList<>();
         retval.add(x);
         retval.add(y);
-        retval.add(z);
         return retval;
     }
 

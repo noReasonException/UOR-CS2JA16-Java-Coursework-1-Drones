@@ -72,7 +72,7 @@ public class VectorCore{
 
     @Override
     public String toString() {
-        return "Vector"+dimension+" Object : "+"["+Arrays.toString(data.toArray())+"]";
+        return "Vector"+dimension+" Object : "+"("+Arrays.toString(data.toArray()).replace("[","").replace("]","")+")";
     }
 
     public int getDimension() {
