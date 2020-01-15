@@ -1,8 +1,11 @@
 package object;
 
+import engines.eventengine.Event;
+import engines.eventengine.eventType.EventType;
 import javafx.scene.image.Image;
 import math.vector.Vector2;
 import math.vector.Vector3;
+import world.World;
 
 public class AbstractObject {
     private Vector3 position;
@@ -30,6 +33,10 @@ public class AbstractObject {
 
     public Vector2 getDirection() {
         return direction;
+
+    }
+    public Event genEvent(World world) {
+        return new Event(this, EventType.NoEvent,new Vector3(0,0,0));
     }
 
     public void setDirection(Vector2 direction) {

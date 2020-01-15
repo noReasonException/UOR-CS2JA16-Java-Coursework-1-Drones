@@ -3,19 +3,30 @@ package factories.specification;
 import engines.eventengine.EventEngine;
 import engines.physicsengine.PhysicsEngine;
 import engines.renderengine.RenderEngine;
+import world.World;
 
 abstract public class AbstractEngineFactory {
     protected PhysicsEngine physicsEngine;
     protected EventEngine eventEngine;
     protected RenderEngine renderEngine;
 
-    abstract public PhysicsEngine physicsEngine(AbstractEngineFactory factory);
+    protected World world;
+    protected int sizeX,sizeY;
 
-    abstract public EventEngine eventEngine(AbstractEngineFactory factory);
+    public AbstractEngineFactory(int sizeX, int sizeY) {
+        this.sizeX = sizeX;
+        this.sizeY = sizeY;
+    }
 
-    abstract public RenderEngine renderEngine(AbstractEngineFactory factory);
+    abstract public PhysicsEngine physicsEngine();
 
+    abstract public EventEngine eventEngine();
 
+    abstract public RenderEngine renderEngine();
 
+    abstract public World world();
 
+    public int getSizeX(){return sizeX;}
+
+    public int getSizeY(){return sizeY;}
 }

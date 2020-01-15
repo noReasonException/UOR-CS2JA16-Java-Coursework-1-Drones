@@ -36,7 +36,7 @@ public class GuiMain extends Application {
     public void initializeFactories(){
         try{
 
-            this.engineFactory=new EngineFactory();
+            this.engineFactory=new EngineFactory(100,100);
             this.guiFactory=new GuiFactory(engineFactory);
             this.globalLogger=this.guiFactory.getLogArea();
             //this.pulseClock=new Clock();

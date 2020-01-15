@@ -1,5 +1,6 @@
 package world;
 
+import engines.eventengine.Event;
 import object.AbstractObject;
 
 import java.util.ArrayList;
@@ -29,6 +30,9 @@ public class World {
             }
         }
         return map;
+    }
+    public void updateWorld(Event v){
+        //TODO write logic here
     }
 
 }
