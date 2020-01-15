@@ -1,4 +1,8 @@
 
+import factories.EngineFactory;
+import factories.GuiFactory;
+import factories.specification.AbstractEngineFactory;
+import factories.specification.AbstractGuiFactory;
 import gui.LogArea;
 import gui.Menu;
 import javafx.application.Application;
@@ -16,8 +20,16 @@ public class GuiMain extends Application {
         launch(args);
     }
 
+    private AbstractEngineFactory engineFactory;
+    private AbstractGuiFactory guiFactory;
+
+    public void initializeFactories(){
+        this.engineFactory=new EngineFactory();
+        this.guiFactory=new GuiFactory(engineFactory);
+    }
     @Override
     public void start(Stage primaryStage) {
+        initializeFactories();
         primaryStage.setTitle("Hello World!");
         Button btn = new Button();
         btn.setText("Say 'Hello World'");
@@ -30,10 +42,10 @@ public class GuiMain extends Application {
         });
 
         BorderPane root = new BorderPane();
-        root.setBottom(new Menu());
-        LogArea a = new LogArea();
+        root.setBottom(guiFactory.getMenu());
+        LogArea a = guiFactory.getLogArea();
         root.setLeft(a);
-        a.warn("Hello");
+        a.error(new IllegalArgumentException("invalid"));
 
         primaryStage.setScene(new Scene(root, 800, 650));
         primaryStage.show();

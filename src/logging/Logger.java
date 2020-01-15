@@ -10,4 +10,7 @@ public interface Logger {
     default void error(String s){
         System.out.println(s);
     }
+    default void error(Exception e){
+        System.out.println(e.getMessage());
+    }
 }

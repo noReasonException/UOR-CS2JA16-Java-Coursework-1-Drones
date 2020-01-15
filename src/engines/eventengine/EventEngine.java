@@ -1,10 +1,10 @@
-package engines.physicsengine;
+package engines.eventengine;
 
 import engines.AbstractEngine;
 import factories.specification.AbstractEngineFactory;
 
-public class PhysicsEngine extends AbstractEngine {
-    public PhysicsEngine(AbstractEngineFactory factory) {
+public class EventEngine extends AbstractEngine {
+    public EventEngine(AbstractEngineFactory factory) {
         super(factory);
     }
 
@@ -12,5 +12,4 @@ public class PhysicsEngine extends AbstractEngine {
     public void run() {
 
     }
-
 }
