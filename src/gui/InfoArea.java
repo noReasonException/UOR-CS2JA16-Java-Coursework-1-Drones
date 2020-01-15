@@ -18,7 +18,6 @@ public class InfoArea extends VBox {
     public InfoArea(AbstractGuiFactory guiFactory, AbstractEngineFactory engineFactory) {
         this.guiFactory=guiFactory;
         this.engineFactory=engineFactory;
-        subscribe();
     }
 
     protected HBox genObjectCard(AbstractObject object){

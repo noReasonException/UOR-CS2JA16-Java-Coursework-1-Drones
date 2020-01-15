@@ -9,5 +9,5 @@ public class StaticObject extends DynamicObject {
     public StaticObject(Vector3 position, Vector2 direction, Image representation) {
         super(position, direction, representation);
     }
-    
+
 }
