@@ -17,6 +17,7 @@ public class Clock implements Runnable, Logger {
                 for (Thread any:subscribers){
                     any.start();
                 }
+
             }
         }catch (InterruptedException e){
             warn("Clock Interrupted , Recovery");

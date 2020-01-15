@@ -7,8 +7,9 @@ public class AbstractObject {
     private Vector3 position;
     private Vector2 direction;
 
-    public AbstractObject(Vector3 position) {
+    public AbstractObject(Vector3 position, Vector2 direction) {
         this.position = position;
+        this.direction = direction;
     }
 
     public Vector3 getPosition() {

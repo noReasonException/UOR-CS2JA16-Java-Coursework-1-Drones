@@ -1,4 +1,12 @@
 package engines.physicsengine;
 
-public class PhysicsEngine {
+import engines.AbstractEngine;
+
+public class PhysicsEngine extends AbstractEngine {
+
+    @Override
+    public void run() {
+
+    }
+
 }
