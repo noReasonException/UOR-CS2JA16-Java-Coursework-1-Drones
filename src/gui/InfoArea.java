@@ -24,8 +24,8 @@ public class InfoArea extends VBox {
         HBox box = new HBox();
         box.getChildren().add(new ImageView(object.getRepresentation()));
         box.getChildren().add(new Label(object.toString()));
-        box.getChildren().add(new Label(object.getPosition().toString()));
-        box.getChildren().add(new Label(object.getDirection().toString()));
+        box.getChildren().add(new Label("Position"+object.getPosition().toString()));
+        box.getChildren().add(new Label("Angle"+object.getDirection()));
 
         return box;
 

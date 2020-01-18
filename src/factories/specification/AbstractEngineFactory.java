@@ -1,32 +1,37 @@
 package factories.specification;
 
-import engines.eventengine.EventEngine;
+import database.Database;
 import engines.physicsengine.PhysicsEngine;
-import engines.renderengine.RenderEngine;
+import engines.renderer.Renderer;
+import object.AbstractObject;
 import world.World;
 
 abstract public class AbstractEngineFactory {
     protected PhysicsEngine physicsEngine;
-    protected EventEngine eventEngine;
-    protected RenderEngine renderEngine;
-
+    protected Renderer renderer;
     protected World world;
-    protected int sizeX,sizeY;
+    protected Database<AbstractObject> data;
 
-    public AbstractEngineFactory(int sizeX, int sizeY) {
+    protected int sizeX,sizeY,sizeZ;
+
+    public AbstractEngineFactory(int sizeX, int sizeY, int sizeZ) {
         this.sizeX = sizeX;
         this.sizeY = sizeY;
+        this.sizeZ = sizeZ;
     }
+
+    abstract public Database<AbstractObject> getData();
 
     abstract public PhysicsEngine physicsEngine();
 
-    abstract public EventEngine eventEngine();
-
-    abstract public RenderEngine renderEngine();
+    abstract public Renderer renderEngine();
 
     abstract public World world();
+
 
     public int getSizeX(){return sizeX;}
 
     public int getSizeY(){return sizeY;}
+
+    public int getSizeZ() { return sizeZ; }
 }

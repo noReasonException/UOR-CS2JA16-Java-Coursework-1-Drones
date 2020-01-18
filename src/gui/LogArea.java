@@ -1,6 +1,5 @@
 package gui;
 
-import engines.AbstractEngine;
 import factories.specification.AbstractEngineFactory;
 import factories.specification.AbstractGuiFactory;
 import javafx.collections.FXCollections;
@@ -9,10 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Separator;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import logging.Logger;
-
-import javax.swing.text.Element;
 
 public class LogArea extends ListView implements Logger {
     private ObservableList<HBox>e = FXCollections.observableArrayList();

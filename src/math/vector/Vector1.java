@@ -1,5 +1,6 @@
 package math.vector;
 
+import math.utils.VectorCoreUtils;
 import math.vector.etc.LinearlyComplexOps;
 
 import java.util.List;
@@ -30,4 +31,6 @@ public class Vector1 extends Vector implements LinearlyComplexOps<Vector1> {
     }
 
     public Vector1(VectorCore core) { super(core); }
+
+    public Vector1(double x) { super(new VectorCore(VectorCoreUtils.list1(x),1));}
 }

@@ -3,11 +3,13 @@ package math.vector;
 import math.vector.etc.LinearlyComplexOps;
 import math.vector.etc.Quantrant;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static math.utils.VectorCoreUtils.list2;
 
 public class Vector2 extends Vector implements LinearlyComplexOps<Vector2> {
+
 
     public Vector2 zero() { return new Vector2(core.toZero()); }
 
@@ -24,7 +26,7 @@ public class Vector2 extends Vector implements LinearlyComplexOps<Vector2> {
     public Vector2(List<Double> elements) {
         super(new VectorCore(elements,2));
     }
-    public Vector2(int x,int y) {
+    public Vector2(double x,double y) {
         super(new VectorCore(list2(x,y),2));
     }
 
@@ -44,5 +46,16 @@ public class Vector2 extends Vector implements LinearlyComplexOps<Vector2> {
             }
             else return Quantrant.Third;
         }
+    }
+
+    @Override
+    public int hashCode() {
+        return core.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof Vector && Arrays.equals(core.getData().toArray(),((Vector3)obj).getCore().getData().toArray());
+
     }
 }

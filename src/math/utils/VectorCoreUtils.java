@@ -26,9 +26,13 @@ public class VectorCoreUtils {
         return retval;
     }
     static public List<Double> list2(double x,double y){
+        List<Double> retval = list1(x);
+        retval.add(y);
+        return retval;
+    }
+    static public List<Double> list1(double x){
         List<Double> retval = new ArrayList<>();
         retval.add(x);
-        retval.add(y);
         return retval;
     }
 

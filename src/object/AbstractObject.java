@@ -1,45 +1,67 @@
 package object;
 
-import engines.eventengine.Event;
-import engines.eventengine.eventType.EventType;
+import etc.Nothing;
 import javafx.scene.image.Image;
+import math.vector.Vector1;
 import math.vector.Vector2;
 import math.vector.Vector3;
 import world.World;
 
+import java.util.function.Function;
+
 public class AbstractObject {
     private Vector3 position;
-    private Vector2 direction;
+    private double direction;
+    private double velocity;
     private Image   representation;
 
 
-    public AbstractObject(Vector3 position, Vector2 direction,Image representation) {
+    public Function<Vector3, Nothing> collisionEventHandler=new Function<Vector3, Nothing>() {
+        @Override
+        public Nothing apply(Vector3 vector3) {
+            setDirection(direction-1);
+            return Nothing.sigleton;
+        }
+    };
+
+
+    public AbstractObject(Vector3 position, double direction,double velocity,Image representation) {
         this.position = position;
         this.direction = direction;
         this.representation=representation;
+        this.velocity=velocity;
     }
 
     public Image getRepresentation() {
         return representation;
     }
 
+    public double getVelocity() {
+        return velocity;
+    }
+
+    public void setVelocity(double velocity) {
+        this.velocity = velocity;
+    }
+
+    public void setRepresentation(Image representation) {
+        this.representation = representation;
+    }
+
     public Vector3 getPosition() {
         return position;
     }
 
-    public void setPosition(Vector3 position) {
+    public AbstractObject setPosition(Vector3 position) {
         this.position = position;
+        return this;
     }
 
-    public Vector2 getDirection() {
+    public double getDirection() {
         return direction;
 
     }
-    public Event genEvent(World world) {
-        return new Event(this, EventType.NoEvent,new Vector3(0,0,0));
-    }
-
-    public void setDirection(Vector2 direction) {
+    public void setDirection(double direction) {
         this.direction = direction;
     }
 }

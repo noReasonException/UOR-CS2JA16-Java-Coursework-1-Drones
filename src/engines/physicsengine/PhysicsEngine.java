@@ -1,43 +1,45 @@
 package engines.physicsengine;
 
-import engines.AbstractEngine;
-import engines.eventengine.Event;
-import engines.physicsengine.Interaction.InteractionType;
-import factories.specification.AbstractEngineFactory;
+import database.Database;
+import javafx.animation.AnimationTimer;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+import javafx.scene.transform.Rotate;
+import math.vector.Vector;
+import math.vector.Vector3;
 import object.AbstractObject;
+import world.World;
 
-import java.util.Stack;
+import java.math.*;
 
-public class PhysicsEngine extends AbstractEngine {
+public class PhysicsEngine extends AnimationTimer {
+    private Database<AbstractObject> dataRef;
+    private World world;
 
-    private Stack<Event> eventStack;
-    public PhysicsEngine(AbstractEngineFactory factory) {
-        super(factory);
-        this.eventStack=new Stack<>();
+
+    public PhysicsEngine(Database<AbstractObject> dataRef,World w) {
+        this.dataRef = dataRef;
+        this.world=w;
     }
 
-    public void subscribeEvent(Event e){
-        eventStack.add(e);
-    }
-    private InteractionType applyRules(Event v){
-        return InteractionType.NoInteraction;
+    public Vector3 nextPosition(AbstractObject b){
+        Vector3 v = b.getPosition();
+        return v.add(new Vector3(b.getVelocity()*Math.sin(Math.toRadians(b.getDirection())),
+                b.getVelocity()*Math.cos(Math.toRadians(b.getDirection())),0)).truncate();
     }
 
     @Override
-    public void run() {
-        while (super.isOperational()){
-            try {
-                for (Event every:eventStack) {
-                    InteractionType t = applyRules(every);
-                    Event enrichedEvent = every.enrichEvent(t);
-                    factory.world().updateWorld(enrichedEvent);
-                    factory.renderEngine().subscribeRichEvent(enrichedEvent);
-                }
-                wait();
-            }catch (InterruptedException e){
-                logger.error(e);
+    public void handle(long l) {
+        for (int i = 0; i < dataRef.asList().size(); i++) {
+            AbstractObject b = dataRef.asList().get(i);
+            Vector3 v = nextPosition(b);
+            if(world.collision(b,v)){
+                System.out.println("Collision");
+                b.collisionEventHandler.apply(v);
             }
-        }
-    }
+            else world.updatePosition(b,v);
 
+
+        }System.out.println("------------------\n");
+    }
 }
