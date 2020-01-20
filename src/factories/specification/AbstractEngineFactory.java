@@ -4,13 +4,15 @@ import database.Database;
 import engines.physicsengine.PhysicsEngine;
 import engines.renderer.Renderer;
 import object.AbstractObject;
+import random.RandomUtills;
 import world.World;
 
 abstract public class AbstractEngineFactory {
     protected PhysicsEngine physicsEngine;
     protected Renderer renderer;
     protected World world;
-    protected Database<AbstractObject> data;
+    protected Database data;
+    protected RandomUtills randomUtills;
 
     protected int sizeX,sizeY,sizeZ;
 
@@ -20,7 +22,7 @@ abstract public class AbstractEngineFactory {
         this.sizeZ = sizeZ;
     }
 
-    abstract public Database<AbstractObject> getData();
+    abstract public Database getData();
 
     abstract public PhysicsEngine physicsEngine();
 
@@ -28,6 +30,7 @@ abstract public class AbstractEngineFactory {
 
     abstract public World world();
 
+    abstract public RandomUtills getRandomUtills();
 
     public int getSizeX(){return sizeX;}
 

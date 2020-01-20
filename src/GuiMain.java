@@ -1,4 +1,6 @@
 
+import database.Database;
+import engines.physicsengine.PhysicsEngine;
 import factories.EngineFactory;
 import factories.GuiFactory;
 import factories.ResourceLoader;
@@ -11,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import logging.Logger;
@@ -19,32 +22,12 @@ import object.AbstractObject;
 import world.World;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 
 public class GuiMain extends Application {
     public static void main(String[] args) {
-        launch(args);
-
-        /*World w = new World(10,10,10);
-        AbstractObject a = new AbstractObject(new Vector3(50,10,1),0,0,null);
-        AbstractObject b = new AbstractObject(new Vector3(50,50,1),0,0,null);
-
-        w.updatePosition(b,b.getPosition());
-        Vector3 newA,newB;
-        for (int i = 0; i < 10; i++) {
-            newA=a.getPosition().add(new Vector3(0,10,0));
-            //newB=b.getPosition().subtract(new Vector3(0,10,0));
-            if(w.collision(a,newA)){
-                System.out.println("DONE");
-                return;
-            }
-            else {
-                w.updatePosition(a,newA);
-               // w.updatePosition(b,newB);
-                System.out.println(newA+"\n");
-               // System.out.println(newB);
-            }
-        }*/
+       launch(args);
 
     }
 
@@ -81,12 +64,12 @@ public class GuiMain extends Application {
     public void initializeFactories(){
         try{
 
-            this.engineFactory=new EngineFactory(100,100,100,500,500);
+
+            this.loader=new ResourceLoader(globalLogger);
+            this.engineFactory=new EngineFactory(50,50,50,500,500,500,loader);
             this.guiFactory=new GuiFactory(engineFactory);
 
             this.globalLogger=this.guiFactory.getLogArea();
-            //this.pulseClock=new Clock();
-            this.loader=new ResourceLoader(globalLogger);
         }catch (FileNotFoundException e){
             throw new RuntimeException(e);
         }
@@ -100,23 +83,25 @@ public class GuiMain extends Application {
     @Override
     public void start(Stage theStage) {
         initializeFactories();
-        theStage.setTitle( "Timeline Example" );
+        theStage.setTitle( "ru020363" );
 
-        Group root = new Group();
+        BorderPane root = new BorderPane();
         Scene theScene = new Scene( root );
         theStage.setScene( theScene );
 
-        Canvas canvas = new Canvas( 512, 512 );
+        Canvas canvas = new Canvas( 500, 500 );
 
-        root.getChildren().add( canvas );
+        root.setCenter(canvas);
+
+
+        root.setRight(guiFactory.getInfoArea());
+        root.setLeft(guiFactory.getLogArea());
+        root.setBottom(guiFactory.getMenu());
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
         ((EngineFactory)engineFactory).setGc(gc);
         render();
 
-        engineFactory.getData().asList().add(new AbstractObject(new Vector3(150,150,3),0.1,0.0001,loader.loadResource("drone01-sm")));
-        engineFactory.getData().asList().add(new AbstractObject(new Vector3(220,150,3),270,0.1,loader.loadResource("drone01-sm")));
-        //engineFactory.getData().asList().add(new AbstractObject(new Vector3(330,150,3),70,0.1,loader.loadResource("droane01-sm")));
 
         theScene.setRoot(root);
         theStage.setScene(theScene);

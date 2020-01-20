@@ -36,6 +36,10 @@ public class Vector3 extends Vector implements LinearlyComplexOps<Vector3> {
         super(new VectorCore(list3(x,y,z),3));
     }
 
+    public Vector2 toVector2(){
+        return new Vector2(core);
+    }
+
     public Vector3 truncate(){
         return new Vector3(core.getData().stream().map(i->Integer.valueOf(i.intValue()).doubleValue()).collect(Collectors.toList()));
     }
@@ -60,7 +64,9 @@ public class Vector3 extends Vector implements LinearlyComplexOps<Vector3> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Vector3 v2 = (Vector3) o;
-        return Objects.equals(core.getData().get(0), v2.getCore().getElement(0))&&Objects.equals(core.getData().get(1), v2.getCore().getElement(1))&&Objects.equals(core.getData().get(2), v2.getCore().getElement(2));
+        return core.getData().get(0).equals(v2.getCore().getElement(0))&&
+                core.getData().get(1).equals(v2.getCore().getElement(1))&&
+                core.getData().get(2).equals(v2.getCore().getElement(2));
     }
 
 }

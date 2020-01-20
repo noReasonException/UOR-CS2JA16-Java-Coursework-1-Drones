@@ -18,33 +18,44 @@ public class Menu extends HBox {
     public Menu(AbstractGuiFactory guiFactory, AbstractEngineFactory engineFactory) {
         this.engineFactory=engineFactory;
         this.guiFactory=guiFactory;
-        getChildren().add(new Button("Add Drone"));
-        getChildren().add(new Button("Clear Drones"));
-        getChildren().add(new Button("Start"));
-        getChildren().add(new Button("Pause"));
+
+
+        Button tmp;
+        getChildren().add(tmp=new Button("Add Drone"));
+        tmp.setOnMouseClicked(addDrone);
+        getChildren().add(tmp=new Button("Clear Drones"));
+        tmp.setOnMouseClicked(clearDrones);
+        getChildren().add(tmp=new Button("Start"));
+        tmp.setOnMouseClicked(start);
+        getChildren().add(tmp=new Button("Pause"));
+        tmp.setOnMouseClicked(pause);
+
+
     }
     private EventHandler<MouseEvent> addDrone=new EventHandler<MouseEvent>(){
         @Override
         public void handle(MouseEvent mouseEvent) {
-
+            engineFactory.getData().addDrone();
+            System.out.println("OK");
         }
     };
     private EventHandler<MouseEvent> clearDrones=new EventHandler<MouseEvent>(){
         @Override
         public void handle(MouseEvent mouseEvent) {
-
+            engineFactory.getData().asList().clear();
+            engineFactory.world().getData().clear();
         }
     };
     private EventHandler<MouseEvent> start=new EventHandler<MouseEvent>(){
         @Override
         public void handle(MouseEvent mouseEvent) {
-
+            engineFactory.physicsEngine().start();
         }
     };
     private EventHandler<MouseEvent> pause=new EventHandler<MouseEvent>(){
         @Override
         public void handle(MouseEvent mouseEvent) {
-
+            engineFactory.physicsEngine().stop();
         }
     };
 }

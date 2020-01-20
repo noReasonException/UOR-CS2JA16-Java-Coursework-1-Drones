@@ -1,7 +1,4 @@
 package random;
-
-import factories.specification.AbstractEngineFactory;
-import math.vector.Vector;
 import math.vector.Vector1;
 import math.vector.Vector3;
 
@@ -22,24 +19,22 @@ public class RandomUtills {
     public Vector3 getRandomLocation(Function<Vector3,Boolean> untilPredicate){
         Vector3 v;
         do{
+            System.out.println("rand");
             v=getRandomLocationVector();
         }while (untilPredicate.apply(v));
         return v;
     }
-    public Vector1 getRandomDirection(Function<Vector1,Boolean> untilPredicate){
-        Vector1 v;
+    public Double getRandomDirection(Function<Double,Boolean> untilPredicate){
+        double v;
         do{
-            v=getRandomDirectionVector();
+            v=random.nextInt(360);
         }while (untilPredicate.apply(v));
         return v;
     }
 
     public Vector3 getRandomLocationVector(){
-        double x=random.nextDouble()%sizeX,y=random.nextDouble()%sizeY,z=random.nextDouble()%sizeZ;
-        return new Vector3(x,y,z);
-    }
-    public Vector1 getRandomDirectionVector(){
-        double x=random.nextDouble()%(Math.PI*2);
-        return new Vector1(x);
+        //double x=random.nextInt((int)sizeX-20),y=random.nextInt((int) sizeY-20),z=random.nextInt((int)sizeZ-20);
+        double x=random.nextInt((int)sizeX-20),y=random.nextInt((int) sizeY-20);
+        return new Vector3(x,y,5);
     }
 }

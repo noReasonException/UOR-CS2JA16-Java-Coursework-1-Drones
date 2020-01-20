@@ -8,12 +8,12 @@ import javafx.scene.transform.Rotate;
 import object.AbstractObject;
 
 public class Renderer extends AnimationTimer {
-    private Database<AbstractObject> dataRef;
+    private Database dataRef;
     private GraphicsContext gc;
     private int windowSizeX,windowSizeY;
 
 
-    public Renderer(Database<AbstractObject> dataRef, GraphicsContext gc,int windowSizeX,int windowSizeY) {
+    public Renderer(Database dataRef, GraphicsContext gc,int windowSizeX,int windowSizeY) {
         this.dataRef = dataRef;
         this.gc=gc;
         this.windowSizeX=windowSizeX;
@@ -25,9 +25,14 @@ public class Renderer extends AnimationTimer {
     }
     private void drawRotatedImage(GraphicsContext gc, Image image, double angle, double tlpx, double tlpy) {
         gc.save(); // saves the current state on stack, including the current transform
-        rotate(gc, angle, tlpx + image.getWidth() / 2, tlpy + image.getHeight() / 2);
+        rotate(gc, fromJavafxAngleToMathAngle(angle), tlpx + image.getWidth() / 2, tlpy + image.getHeight() / 2);
         gc.drawImage(image, tlpx, tlpy);
         gc.restore(); // back to original state (before rotation)
+    }
+
+    private double fromJavafxAngleToMathAngle(double angle){
+        return angle+90;
+
     }
     private void clearCanvas(){
         gc.clearRect(0, 0, windowSizeX, windowSizeY);
@@ -36,8 +41,13 @@ public class Renderer extends AnimationTimer {
     @Override
     public void handle(long l) {
         clearCanvas();
-        for (AbstractObject every : dataRef.asList()) {
-            drawRotatedImage(gc,every.getRepresentation(),every.getDirection(),every.getPosition().getCore().getElement(0),every.getPosition().getCore().getElement(1));
+
+        for (int i = 0; i < dataRef.asList().size(); i++) {
+            AbstractObject every = dataRef.asList().get(i);
+            if(every.isVisible()){
+                drawRotatedImage(gc,every.getRepresentation(),every.getDirection(),every.getPosition().getCore().getElement(0),every.getPosition().getCore().getElement(1));
+            }
+
         }
     }
 }
