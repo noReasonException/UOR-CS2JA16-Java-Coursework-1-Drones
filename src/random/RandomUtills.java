@@ -60,7 +60,7 @@ public class RandomUtills  implements Serializable {
      */
     private Vector3 getRandomLocationVector() {
         //double x=random.nextInt((int)sizeX-20),y=random.nextInt((int) sizeY-20),z=random.nextInt((int)sizeZ-20);
-        double x = Math.abs(random.nextInt((int) windowInfo.getWindowY() - 200)+100), y = Math.abs(random.nextInt((int) windowInfo.getWindowY() - 200)+100);
-        return new Vector3(x, y, 5);
+        double x = Math.abs(random.nextInt((int) windowInfo.getWindowY() - 200)+100), y = Math.abs(random.nextInt((int) windowInfo.getWindowY() - 200)+100),z=Math.abs(random.nextInt(windowInfo.getCubeZ()-1)+1);
+        return new Vector3(x, y, z);
     }
 }

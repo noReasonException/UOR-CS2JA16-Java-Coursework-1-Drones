@@ -13,6 +13,8 @@ import object.AbstractObject;
 
 import java.io.Closeable;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Comparator;
 
 
 public class Renderer extends AnimationTimer implements Closeable {
@@ -93,12 +95,17 @@ public class Renderer extends AnimationTimer implements Closeable {
     @Override
     public void handle(long l) {
         clearCanvas();
-
+        Collections.sort(dataRef.asList(), new Comparator<AbstractObject>() {
+            @Override
+            public int compare(AbstractObject o1, AbstractObject o2) {
+                return o1.getPosition().getCore().getElement(2).compareTo(o2.getPosition().getCore().getElement(2));
+            }
+        });
         for (int i = 0; i < dataRef.asList().size(); i++) {
             AbstractObject every = dataRef.asList().get(i);
             if (every.isVisible()) {
                 drawRotatedImage(gc,
-                                loader.loadResource(every.getRepresentationResourceName()),
+                                loader.loadResource(every),
                                 every.getDirection(),
                                 every.getPosition().getCore().getElement(0),
                                 every.getPosition().getCore().getElement(1));

@@ -1,6 +1,7 @@
 package object;
 
 import engines.physicsengine.FieldOfView;
+import factories.ResourceLoader;
 import math.vector.Vector3;
 import object.AbstractObject;
 import random.RandomUtills;
@@ -10,7 +11,7 @@ import java.util.function.Function;
 
 public class Turret extends AbstractObject {
     public Turret(Vector3 position, double direction, RandomUtills randomUtills) {
-        super(position, direction, 0, "turret01-sm", randomUtills);
+        super(position, direction, 0, ResourceLoader.getTurretResource(), randomUtills);
     }
 
 
@@ -30,6 +31,11 @@ public class Turret extends AbstractObject {
         if(Math.abs(rand.nextInt(1000000)) < 1000){
             setDirection(randomUtills.getRandomDirection(any->true));
         }
-        return super.nonCollisionEventHandler();
+        return new Function<FieldOfView, Boolean>() {
+            @Override
+            public Boolean apply(FieldOfView fieldOfView) {
+                return Math.abs(rand.nextInt(1000000)) < 10000;
+            }
+        };
     }
 }

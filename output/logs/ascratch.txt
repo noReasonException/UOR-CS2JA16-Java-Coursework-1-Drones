@@ -1,0 +1,46 @@
+Info	Drone Added
+Info	Drone Added
+Info	Drone Added
+Info	Drone Added
+Info	object.Bullet@21 erased from mem
+Info	object.Bullet@25 erased from mem
+Info	object.Bullet@26 erased from mem
+Info	object.Bullet@27 erased from mem
+Info	object.Bullet@28 erased from mem
+Info	object.Bullet@29 erased from mem
+Info	object.Bullet@2b erased from mem
+Info	object.Bullet@2a erased from mem
+Info	object.Bullet@2d erased from mem
+Info	object.Bullet@2c erased from mem
+Info	object.Bullet@2e erased from mem
+Info	object.Bullet@2f erased from mem
+Info	object.Bullet@30 erased from mem
+Info	object.Bullet@32 erased from mem
+Info	object.Bullet@31 erased from mem
+Info	object.Bullet@33 erased from mem
+Info	object.Bullet@34 erased from mem
+Info	object.Bullet@35 erased from mem
+Info	object.Bullet@36 erased from mem
+Info	object.Bullet@38 erased from mem
+Info	object.Bullet@37 erased from mem
+Info	object.Bullet@39 erased from mem
+Info	object.Bullet@3b erased from mem
+Info	object.Bullet@3a erased from mem
+Info	object.Bullet@3c erased from mem
+Info	object.Bullet@3d erased from mem
+Info	object.Bullet@3e erased from mem
+Info	object.Bullet@3f erased from mem
+Info	object.Bullet@40 erased from mem
+Info	object.Bullet@41 erased from mem
+Warn	Drone 1 is Dead
+Info	object.Drone@20 erased from mem
+Info	object.Bullet@42 erased from mem
+Info	object.Bullet@44 erased from mem
+Info	object.Bullet@43 erased from mem
+Info	object.Bullet@45 erased from mem
+Info	object.Bullet@46 erased from mem
+Info	object.Bullet@47 erased from mem
+Info	object.Bullet@48 erased from mem
+Info	object.Bullet@49 erased from mem
+Info	Physics Engine Stopped
+Info	Information panel thread Stopped

@@ -3,6 +3,7 @@ package factories;
 import javafx.scene.image.Image;
 import logging.DefaultLogger;
 import logging.Logger;
+import object.AbstractObject;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -18,7 +19,9 @@ import java.util.Random;
 public class ResourceLoader {
     private Logger logger;
     private HashMap<String, Image> quickLoader = new HashMap<>();
-    private static final String [] DRONE_RESOURCES =new String[]{"drone01-sm","drone02-sm","drone03-sm"};
+    private static final String [] DRONE_RESOURCES =new String[]{"drone01","drone02","drone03"};
+    private static final String BULLET_RESOURCE ="bullet";
+    private static final String TURRET_RESOURCE ="turret";
 
     private Random rand=new Random();
 
@@ -79,13 +82,19 @@ public class ResourceLoader {
             return quickLoader.get("error");
         }
     }
-    public Image loadRandomResource(){
-        return loadResource(getRandomResource());
+    public Image loadResource(AbstractObject o){
+        return loadResource(o.getRepresentationResourceName()+"-"+o.getPosition().getCore().getElement(2).intValue());
     }
-
-    public String getRandomResource(){
+    public String getRandomDroneResource(){
         int index=Math.abs(rand.nextInt(DRONE_RESOURCES.length));
         return DRONE_RESOURCES[index];
     }
 
+    public static String getBulletResource() {
+        return BULLET_RESOURCE;
+    }
+
+    public static String getTurretResource() {
+        return TURRET_RESOURCE;
+    }
 }

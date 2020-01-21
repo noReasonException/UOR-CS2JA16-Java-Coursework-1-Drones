@@ -49,7 +49,7 @@ abstract public class AbstractObject  implements Serializable {
      * calculates if is dead
      * @return true if is dead , false otherwise
      */
-    private boolean isDead() {
+    protected boolean isDead() {
         this.lifes -= 1;
         if (this.lifes <= 0) {
             return true;
@@ -78,39 +78,12 @@ abstract public class AbstractObject  implements Serializable {
      *this event handler is called every time this object is hitting another object
      * @return true if the last hit was resulted in the dead of the drone , false otherwise
      */
-    public Function<FieldOfView, Boolean> collisionEventHandler() {
-        return new Function<FieldOfView, Boolean>() {
-            @Override
-            public Boolean apply(FieldOfView fieldOfView) {
-                if (isDead()) {
-                    fieldOfView.logger.warn("Drone " + id + " is Dead");
-                    return true;
-                } else {
-                    double direction = randomUtills.getRandomDirection(d -> {
-                        setDirection(d);
-                        return collisionAt(getPosition(), fieldOfView.world, 3) == 3;
-
-                    });
-                    setDirection(direction);
-                }
-                return false;
-            }
-        };
-    }
-
+    abstract public Function<FieldOfView, Boolean> collisionEventHandler() ;
     /**
      * this event handler is called every time the object doesnt hit anywhere
      * @return true if this object want to fire a bullet , false otherwise
      */
-    public Function<FieldOfView, Boolean> nonCollisionEventHandler() {
-        return new Function<FieldOfView, Boolean>() {
-            @Override
-            public Boolean apply(FieldOfView fieldOfView) {
-                return Math.abs(rand.nextInt(1000000)) < 10000;
-                //return hasFired == true ? !(hasFired = false) : hasFired;
-            }
-        };
-    }
+    abstract public Function<FieldOfView, Boolean> nonCollisionEventHandler() ;
 
     /**
      * calculates the next position of this object

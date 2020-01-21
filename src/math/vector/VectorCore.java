@@ -132,7 +132,7 @@ public class VectorCore implements Serializable {
 
     @Override
     public String toString() {
-        return Arrays.toString(data.toArray()).replace("[", "").replace("]", "") + ")";
+        return Arrays.toString(data.toArray()).replace("[", "").replace("]", "");
     }
 
     /**

@@ -48,9 +48,7 @@ public class World implements Closeable {
         if (droneRealLocation.getCore().getElement(0).intValue() % windowInfo.getCubeX() != 0) worldX += 1;
         int worldY = droneRealLocation.getCore().getElement(1).intValue() / windowInfo.getCubeY();
         if (droneRealLocation.getCore().getElement(1).intValue() % windowInfo.getCubeY() != 0) worldY += 1;
-        int worldZ = droneRealLocation.getCore().getElement(2).intValue() / windowInfo.getCubeZ();
-        if (droneRealLocation.getCore().getElement(2).intValue() % windowInfo.getCubeZ() != 0) worldZ += 1;
-        return new Vector3(Integer.valueOf(worldX).doubleValue(), Integer.valueOf(worldY).doubleValue(), Integer.valueOf(worldZ).doubleValue());
+        return new Vector3(Integer.valueOf(worldX).doubleValue(), Integer.valueOf(worldY).doubleValue(),droneRealLocation.getCore().getElement(2));
     }
 
     /**
@@ -91,7 +89,7 @@ public class World implements Closeable {
                 location.getCore().getElement(1) > windowInfo.getWindowY() - randint.nextInt(50) ||
                 location.getCore().getElement(0) < 5 ||
                 location.getCore().getElement(1) < 5 ||
-                location.getCore().getElement(2) < 5;
+                location.getCore().getElement(2) < 1;
     }
 
     /**

@@ -39,7 +39,7 @@ public class GuiMain extends Application {
         try {
 
 
-            this.windowInfo = new WindowInfo(50, 50, 50, 500, 500, 720);
+            this.windowInfo = new WindowInfo(50, 50, 500, 500);
             this.loader = ResourceLoader.siglentonInitializer();
 
 

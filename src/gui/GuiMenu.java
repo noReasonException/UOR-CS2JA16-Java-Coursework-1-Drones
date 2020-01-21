@@ -120,9 +120,10 @@ public class GuiMenu extends MenuBar {
         b.getItems().add(clear_logs);
         clear_logs.setOnAction(e->guiFactory.getLogArea().getItems().clear());
         save_logs.setOnAction(e->{
-            String a = WindowsUtils.genDirectoryChooser();
+            File a = WindowsUtils.genFileSaveChooser();
+            if(a==null)return;
             try{
-                new LogsSavedInfoWindow(loader,FileSaver.saveToFile(a,guiFactory.getLogArea().toString())).display();
+                new LogsSavedInfoWindow(loader,FileSaver.saveToFile(a.getAbsolutePath(),guiFactory.getLogArea().toString())).display();
             }catch (IOException er){
                 new ErrorDuringSaveOfLogs(loader).display();
             }

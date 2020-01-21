@@ -43,7 +43,7 @@ public class InformationPanel extends ListView implements Closeable, Updateable 
         HBox v = new HBox();
 
 
-        v.getChildren().add(new ImageView(loader.loadResource(o.getRepresentationResourceName())));
+        v.getChildren().add(new ImageView(loader.loadResource(o)));
         v.getChildren().add(new Separator());
         v.getChildren().add(new Label("ID:\t"+o.getId()));
         v.getChildren().add(new Separator());

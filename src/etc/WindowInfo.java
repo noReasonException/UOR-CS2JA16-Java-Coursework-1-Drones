@@ -10,13 +10,12 @@ import java.io.Serializable;
 public class WindowInfo implements Serializable {
     private int cubeX, cubeY, cubeZ, windowX, windowY, windowZ;
 
-    public WindowInfo(int cubeX, int cubeY, int cubeZ, int windowX, int windowY, int windowZ) {
+    public WindowInfo(int cubeX, int cubeY, int windowX, int windowY) {
         this.cubeX = cubeX;
         this.cubeY = cubeY;
-        this.cubeZ = cubeZ;
+        this.cubeZ = Constants.cubeZ;
         this.windowX = windowX;
         this.windowY = windowY;
-        this.windowZ = windowZ;
     }
 
     public int getCubeX() {

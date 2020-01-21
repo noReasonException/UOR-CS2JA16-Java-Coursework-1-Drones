@@ -5,7 +5,7 @@ import logging.Logger;
 import math.vector.Vector3;
 import object.AbstractObject;
 import object.Bullet;
-import object.Drone01;
+import object.Drone;
 import object.Turret;
 import random.RandomUtills;
 import world.World;
@@ -79,7 +79,7 @@ public class Database implements Closeable {
      */
     public AbstractObject addDrone(double direction, double velocity) {
         Vector3 v = u.getRandomLocation(vector -> w.collisionWithAny(vector));
-        AbstractObject o = new Drone01(v, direction, velocity, u);
+        AbstractObject o = new Drone(v, direction, velocity, u);
         asList().add(o);
         w.updatePosition(o, v);
         return o;
