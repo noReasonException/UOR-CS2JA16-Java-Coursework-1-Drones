@@ -11,6 +11,8 @@ import java.util.Random;
 import java.util.function.Function;
 
 /**
+ * AbstractObject
+ * This class represents any object that can be handled by the RenderEngine
  *
  */
 abstract public class AbstractObject {
@@ -27,12 +29,21 @@ abstract public class AbstractObject {
 
     private int id;
 
+    /**
+     * Makes this object not visible
+     * useful if a object has lost its lifes(a.k.a dies)
+     * @param visible
+     */
     public void setVisible(boolean visible) {
         isVisible = visible;
     }
 
     private static int ID = 0;
 
+    /**
+     * calculates if is dead
+     * @return true if is dead , false otherwise
+     */
     private boolean isDead() {
         this.lifes -= 1;
         if (this.lifes <= 0) {
@@ -41,14 +52,27 @@ abstract public class AbstractObject {
         return false;
     }
 
+    /**
+     * gets the unique identifier of this object
+     * @return an incremental ID of this object
+     *
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     *
+     * @return true if is dead , false otherwise
+     */
     public boolean isVisible() {
         return isVisible;
     }
 
+    /**
+     *this event handler is called every time this object is hitting another object
+     * @return true if the last hit was resulted in the dead of the drone , false otherwise
+     */
     public Function<FieldOfView, Boolean> collisionEventHandler() {
         return new Function<FieldOfView, Boolean>() {
             @Override
@@ -69,6 +93,10 @@ abstract public class AbstractObject {
         };
     }
 
+    /**
+     * this event handler is called every time the object doesnt hit anywhere
+     * @return true if this object want to fire a bullet , false otherwise
+     */
     public Function<FieldOfView, Boolean> nonCollisionEventHandler() {
         return new Function<FieldOfView, Boolean>() {
             @Override
@@ -79,11 +107,23 @@ abstract public class AbstractObject {
         };
     }
 
+    /**
+     * calculates the next position of this object
+     * @param v the current position
+     * @return
+     */
     public Vector3 nextPosition(Vector3 v) {
         return v.add(new Vector3((getVelocity() * Math.cos(Math.toRadians(getDirection()))),
                 (getVelocity() * Math.sin(Math.toRadians(getDirection()))), 0));
     }
 
+    /***
+     *
+     * @param v the current position
+     * @param w the world
+     * @param upper the uppermost step allowed(preventing inf loops)
+     * @return the amount of steps until you hit something , useful for change direction
+     */
     public int collisionAt(Vector3 v, World w, int upper) {
         int real = 0;
         for (int i = 0; i < upper; i++) {
@@ -96,6 +136,15 @@ abstract public class AbstractObject {
 
     }
 
+    /**
+     * The constructor
+     *
+     * @param position the position of the object
+     * @param direction the direction (0<=x<=360)
+     * @param velocity the speed at pixels per frame
+     * @param representation the image representing this object
+     * @param randomUtills the randomUtills object
+     */
     public AbstractObject(Vector3 position, double direction, double velocity, Image representation, RandomUtills randomUtills) {
         this.position = position;
         this.direction = direction;
@@ -105,6 +154,7 @@ abstract public class AbstractObject {
         this.id = (ID += 1);
     }
 
+    ///Getters and setters
     public Image getRepresentation() {
         return representation;
     }

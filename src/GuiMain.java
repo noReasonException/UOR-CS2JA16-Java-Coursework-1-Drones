@@ -1,34 +1,28 @@
 
-import database.Database;
-import engines.physicsengine.PhysicsEngine;
 import etc.WindowInfo;
 import factories.EngineFactory;
 import factories.GuiFactory;
 import factories.ResourceLoader;
 import factories.specification.AbstractEngineFactory;
 import factories.specification.AbstractGuiFactory;
-import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import logging.Logger;
-import math.vector.Vector3;
-import object.AbstractObject;
-import world.World;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 
 
 public class GuiMain extends Application {
+    /**
+     * the main method , launches the application
+     * @param args the systems args(not used)
+     */
     public static void main(String[] args) {
-       launch(args);
+        launch(args);
 
     }
 
@@ -37,52 +31,33 @@ public class GuiMain extends Application {
     private AbstractGuiFactory guiFactory;
     private ResourceLoader loader;
     private Logger globalLogger;
-    double x=0d,y=0d,angle=0d;
 
-    public double getX() {
-        return x;
-    }
-
-    public void setX(double x) {
-        this.x = x;
-    }
-
-    public double getY() {
-        return y;
-    }
-
-    public void setY(double y) {
-        this.y = y;
-    }
-
-    public double getAngle() {
-        return angle;
-    }
-
-    public void setAngle(double angle) {
-        this.angle = angle;
-    }
-
-    public void initializeFactories(){
-        try{
+    /**
+     * Initializes this session's factories ,loggers and resource loaders
+     */
+    public void initializeFactories() {
+        try {
 
 
-            this.windowInfo=new WindowInfo(50,50,50,500,500,720);
-            this.loader=ResourceLoader.siglentonInitializer();
+            this.windowInfo = new WindowInfo(50, 50, 50, 500, 500, 720);
+            this.loader = ResourceLoader.siglentonInitializer();
 
 
-            this.guiFactory=new GuiFactory(windowInfo,loader);
-            this.engineFactory=guiFactory.getEngineFactory();
+            this.guiFactory = new GuiFactory(windowInfo, loader);
+            this.engineFactory = guiFactory.getEngineFactory();
 
 
-            this.globalLogger=this.guiFactory.getLogArea();
+            this.globalLogger = this.guiFactory.getLogArea();
 
-        }catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void initializeLoggers(){
+    /**
+     * Assigns in each Loggable module a the Gui logger
+     */
+    public void initializeLoggers() {
         this.engineFactory.physicsEngine().setLogger(guiFactory.getLogArea());
         this.engineFactory.renderEngine().setLogger(guiFactory.getLogArea());
         this.engineFactory.world().setLogger(guiFactory.getLogArea());
@@ -90,23 +65,30 @@ public class GuiMain extends Application {
         this.loader.setLogger(guiFactory.getLogArea());
     }
 
-    public void render(){
+    /**
+     * starts the RenderEngine and the PhysicsEngine
+     */
+    public void render() {
         engineFactory.renderEngine().start();
         engineFactory.physicsEngine().start();
     }
 
 
+    /**
+     * The GuiMain main entry point.
+     * @param theStage the javafx pre-initialized stage
+     */
     @Override
     public void start(Stage theStage) {
         initializeFactories();
 
-        theStage.setTitle( "ru020363" );
+        theStage.setTitle("ru020363");
 
         BorderPane root = new BorderPane();
-        Scene theScene = new Scene( root );
-        theStage.setScene( theScene );
+        Scene theScene = new Scene(root);
+        theStage.setScene(theScene);
 
-        Canvas canvas = new Canvas( 500, 500 );
+        Canvas canvas = new Canvas(500, 500);
 
         root.setCenter(canvas);
 
@@ -115,7 +97,7 @@ public class GuiMain extends Application {
         root.setBottom(guiFactory.getMenu());
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        ((EngineFactory)engineFactory).setGc(gc);
+        ((EngineFactory) engineFactory).setGc(gc);
         render();
 
 

@@ -10,12 +10,18 @@ import object.AbstractObject;
 import java.util.HashMap;
 import java.util.Random;
 
+
+/***
+ * The world map object
+ * keeps track of all objects in the game , detects collisions etc
+ */
 public class World {
     private HashMap<Vector3, AbstractObject> data;
     private WindowInfo windowInfo;
     private Random randint = new Random();
     private Logger logger = new DefaultLogger();
 
+    //logger
     public void setLogger(Logger logger) {
         this.logger = logger;
     }
@@ -24,11 +30,17 @@ public class World {
         return data;
     }
 
+
     public World(WindowInfo windowInfo) {
         this.windowInfo = windowInfo;
         this.data = new HashMap<>();
     }
 
+    /***
+     * converts the real location of each object into the world-compatible tile location
+     * @param droneRealLocation the drone location
+     * @return the drones tile-based location
+     */
     public Vector3 toWorldCoordinates(Vector3 droneRealLocation) {
         int worldX = (droneRealLocation.getCore().getElement(0).intValue() / windowInfo.getCubeX());
         if (droneRealLocation.getCore().getElement(0).intValue() % windowInfo.getCubeX() != 0) worldX += 1;
@@ -39,6 +51,11 @@ public class World {
         return new Vector3(Integer.valueOf(worldX).doubleValue(), Integer.valueOf(worldY).doubleValue(), Integer.valueOf(worldZ).doubleValue());
     }
 
+    /**
+     *
+     * @param location the location query
+     * @return true if anything exists there(including level limits)
+     */
     public boolean collisionWithAny(Vector3 location) {
         AbstractObject result = data.get(toWorldCoordinates(location));
         if (collisionWithWall(location)) return true;
@@ -47,6 +64,12 @@ public class World {
         } else return true;
     }
 
+    /**
+     *
+     * @param d the object firing this method
+     * @param location the objects next location
+     * @return true if the object can procceed in the next location
+     */
     public boolean collision(AbstractObject d, Vector3 location) {
         AbstractObject result = data.get(toWorldCoordinates(location));
         if (collisionWithWall(location)) return true;
@@ -56,6 +79,11 @@ public class World {
         else return true;
     }
 
+    /**
+     *
+     * @param location the location query
+     * @return true if this location is outside level limits
+     */
     public boolean collisionWithWall(Vector3 location) {
         return location.getCore().getElement(0) > windowInfo.getWindowX() - randint.nextInt(50) ||
                 location.getCore().getElement(1) > windowInfo.getWindowY() - randint.nextInt(50) ||
@@ -64,11 +92,20 @@ public class World {
                 location.getCore().getElement(2) < 5;
     }
 
+    /**
+     * deletes the object from the memory
+     * @param ab the issuing AbstractObject
+     */
     public void eraseObject(AbstractObject ab) {
         data.remove(ab.getPosition(), ab);
         logger.info(ab.toString() + " erased from mem");
     }
 
+    /**
+     * updates the location of object @param d into @param location
+     * @param d the object
+     * @param location the object's next location
+     */
     public void updatePosition(AbstractObject d, Vector3 location) {
         synchronized (this) {
             this.data.remove(toWorldCoordinates(location), d);
