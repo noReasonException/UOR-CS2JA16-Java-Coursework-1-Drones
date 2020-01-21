@@ -36,8 +36,10 @@ public class ToolArea extends HBox {
         Button tmp;
         getChildren().add(tmp = new Button("Add Drone"));
         tmp.setOnMouseClicked(addDrone);
-        getChildren().add(tmp = new Button("Clear Drones"));
-        tmp.setOnMouseClicked(clearDrones);
+        getChildren().add(tmp = new Button("Add Turret"));
+        tmp.setOnMouseClicked(addTurret);
+        getChildren().add(tmp = new Button("Clear Objects"));
+        tmp.setOnMouseClicked(clear);
         getChildren().add(tmp = new Button("Start"));
         tmp.setOnMouseClicked(start);
         getChildren().add(tmp = new Button("Pause"));
@@ -55,15 +57,26 @@ public class ToolArea extends HBox {
         }
     };
     /**
+     * The 'addTurret' button action handler
+     * uses the Database object to create and subscribe a new Turret into the system
+     */
+    private EventHandler<MouseEvent> addTurret = new EventHandler<MouseEvent>() {
+        @Override
+        public void handle(MouseEvent mouseEvent) {
+            engineFactory.getDatabase().addTurret();
+            logger.info("Turret Added");
+        }
+    };
+    /**
      * The 'ClearDrones' button action handler
      * Uses the Database object to clear all the drones and bullets from the system
      */
-    private EventHandler<MouseEvent> clearDrones = new EventHandler<MouseEvent>() {
+    private EventHandler<MouseEvent> clear = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent mouseEvent) {
             engineFactory.getDatabase().asList().clear();
             engineFactory.getWorldMap().getData().clear();
-            logger.info("Drones cleared");
+            logger.info("Objects cleared");
         }
     };
     /**

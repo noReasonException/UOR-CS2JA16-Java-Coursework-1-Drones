@@ -1,11 +1,12 @@
 package math.vector;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * This is a abstract class vector
  */
-public class Vector {
+public class Vector implements Serializable {
     VectorCore core;
 
     /**

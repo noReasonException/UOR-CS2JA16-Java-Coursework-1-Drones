@@ -2,6 +2,7 @@ package math.vector;
 
 import math.utils.VectorCoreUtils;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.stream.Collectors;
 /**
  * This is the non-type safe implementation of a vector
  */
-public class VectorCore {
+public class VectorCore implements Serializable {
 
     private List<Double> data;
 

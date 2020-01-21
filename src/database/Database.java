@@ -1,14 +1,12 @@
 package database;
 
 import etc.Constants;
-import factories.ResourceLoader;
-import javafx.scene.image.Image;
 import logging.Logger;
-import math.vector.Vector;
 import math.vector.Vector3;
 import object.AbstractObject;
 import object.Bullet;
 import object.Drone01;
+import object.Turret;
 import random.RandomUtills;
 import world.World;
 
@@ -94,6 +92,28 @@ public class Database implements Closeable {
     public AbstractObject addDrone() {
 
         return addDrone(random.nextInt(360), ((double) random.nextInt(6)) / 10 + 0.1);
+    }
+    /**
+     * Adds a turret into the system
+     *
+     * @param direction the desired direction (0<=x<=360) (bigger or smaller will converted automatically)
+     * @return the newrly created turret (as AbstractObject)
+     */
+    public AbstractObject addTurret(double direction) {
+        Vector3 v = u.getRandomLocation(vector -> w.collisionWithAny(vector));
+        AbstractObject o = new Turret(v, direction, u);
+        asList().add(o);
+        w.updatePosition(o, v);
+        return o;
+    }
+
+    /***
+     * Adds a turret into the system , with random direction
+     * @return the newrly created turret (as AbstractObject)
+     */
+    public AbstractObject addTurret() {
+
+        return addTurret(random.nextInt(360));
     }
 
     /**

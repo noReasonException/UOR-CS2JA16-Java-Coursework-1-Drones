@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 import static math.utils.VectorCoreUtils.list3;
 
-public class Vector3 extends Vector implements LinearlyComplexOps<Vector3>, Serializable {
+public class Vector3 extends Vector implements LinearlyComplexOps<Vector3> {
 
 
     /**

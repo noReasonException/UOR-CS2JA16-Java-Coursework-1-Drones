@@ -21,8 +21,11 @@ public class Serializer {
         List<AbstractObject> retval;
         FileInputStream fileIn = new FileInputStream(filename);
         ObjectInputStream in = new ObjectInputStream(fileIn);
+        retval=(List<AbstractObject>) in.readObject();
         in.close();
         fileIn.close();
-        return (List<AbstractObject>) in.readObject();
+
+        logger.info("Simulation loaded from " + filename);
+        return retval;
     }
 }

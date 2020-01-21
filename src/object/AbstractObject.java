@@ -21,14 +21,18 @@ abstract public class AbstractObject  implements Serializable {
     private double direction;
     private double velocity;
     private String representationResourceName;
-    private Random rand = new Random();
-    private RandomUtills randomUtills;
+    protected Random rand = new Random();
+    protected RandomUtills randomUtills;
     private boolean isVisible = true;
-    private int lifes = 10000;
+    private int lifes = 10;
 
     private boolean hasFired = true;
 
     private int id;
+
+    public int getLifes() {
+        return lifes;
+    }
 
     /**
      * Makes this object not visible

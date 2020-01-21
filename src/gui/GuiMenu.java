@@ -11,13 +11,15 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import logging.DefaultLogger;
+import object.AbstractObject;
 import utils.FileSaver;
 import logging.Logger;
 import utils.Serializer;
 import utils.gui.WindowsUtils;
 
-import java.io.FileNotFoundException;
+import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * This is the main menu
@@ -73,7 +75,9 @@ public class GuiMenu extends MenuBar {
 
         save.setOnAction(e->{
             try{
-                Serializer.toFile(WindowsUtils.genFileChooser(),guiFactory.getEngineFactory().getDatabase().asList(),logger);
+                File path = WindowsUtils.genFileSaveChooser();
+                if(path==null)return;
+                Serializer.toFile(path.getAbsolutePath(),guiFactory.getEngineFactory().getDatabase().asList(),logger);
             }catch (IOException er){
                 new ErrorDuringSimulationSave(loader).display();
                 logger.error(er);
@@ -81,7 +85,18 @@ public class GuiMenu extends MenuBar {
 
         });
         load.setOnAction(e->{
-            //Serializer.toFile(WindowsUtils.genDirectoryChooser(),guiFactory.getEngineFactory().getDatabase().asList(),logger);
+            List<AbstractObject> loaded;
+            try{
+                File path = WindowsUtils.genFileChooser();
+                if(path==null)return;
+                loaded = Serializer.fromFile(path.getAbsolutePath(),logger);
+                guiFactory.getEngineFactory().getDatabase().asList().clear();
+                guiFactory.getEngineFactory().getDatabase().asList().addAll(loaded);
+            }catch (IOException|ClassNotFoundException er){
+                new ErrorDuringSimulationSave(loader).display();
+                logger.error(er);
+                er.printStackTrace();
+            }
         });
         load_default.setOnAction(e -> {
             guiFactory.getEngineFactory().getDatabase().genDefaultDatabase();
