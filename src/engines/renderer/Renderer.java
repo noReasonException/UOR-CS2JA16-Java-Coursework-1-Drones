@@ -81,8 +81,8 @@ public class Renderer extends AnimationTimer {
 
     /**
      * The main rendrerers mainloop
-     * in each frame
-     * @param l
+     * in each frame , we clear the canvas , and draw each object in their respective position , calculated by PhysicsEngine
+     * @param l the current timestamp(not used here)
      */
     @Override
     public void handle(long l) {
@@ -91,7 +91,11 @@ public class Renderer extends AnimationTimer {
         for (int i = 0; i < dataRef.asList().size(); i++) {
             AbstractObject every = dataRef.asList().get(i);
             if (every.isVisible()) {
-                drawRotatedImage(gc, every.getRepresentation(), every.getDirection(), every.getPosition().getCore().getElement(0), every.getPosition().getCore().getElement(1));
+                drawRotatedImage(gc,
+                                every.getRepresentation(),
+                                every.getDirection(),
+                                every.getPosition().getCore().getElement(0),
+                                every.getPosition().getCore().getElement(1));
             }
 
         }

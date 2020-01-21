@@ -1,10 +1,7 @@
 package object;
 
 import engines.physicsengine.FieldOfView;
-import etc.Nothing;
 import javafx.scene.image.Image;
-import math.vector.Vector1;
-import math.vector.Vector2;
 import math.vector.Vector3;
 import random.RandomUtills;
 import world.World;

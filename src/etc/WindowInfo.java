@@ -1,5 +1,10 @@
 package etc;
 
+
+/**
+ * This class provides useful information about the screen and the world size(watch out , there is a difference)
+ *
+ */
 public class WindowInfo {
     private int cubeX, cubeY, cubeZ, windowX, windowY, windowZ;
 
