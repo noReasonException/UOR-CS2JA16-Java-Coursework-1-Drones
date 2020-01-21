@@ -20,7 +20,7 @@ public class Bullet extends AbstractObject {
      * @param randomUtills the randomUtills object
      */
     public Bullet(Vector3 position, double direction, double velocity, RandomUtills randomUtills) {
-        super(position, direction, velocity, ResourceLoader.siglenton().loadResource("bullet-sm"), randomUtills);
+        super(position, direction, velocity, "bullet-sm", randomUtills);
     }
 
 

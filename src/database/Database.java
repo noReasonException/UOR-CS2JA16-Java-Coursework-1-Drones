@@ -41,6 +41,15 @@ public class Database implements Closeable {
         this.w = w;
         this.logger=logger;
     }
+    public void genDefaultDatabase(){
+        data.clear();
+        addDrone();
+        addDrone();
+        addDrone();
+    }
+
+
+
 
     /**
      * Returns the pure data
@@ -50,6 +59,18 @@ public class Database implements Closeable {
     public List<AbstractObject> asList() {
         return data;
     }
+
+    /**
+     * Returns the pure data
+     *
+     * @return the ArrayList with the objects of the game
+     */
+    public void fromList(List<AbstractObject> obj) {
+        data.clear();
+        data.addAll(obj);
+    }
+
+
 
     /**
      * Adds a drone into the system

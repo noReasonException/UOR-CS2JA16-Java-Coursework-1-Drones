@@ -1,14 +1,13 @@
 package factories;
 
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import logging.DefaultLogger;
 import logging.Logger;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
+import java.util.Random;
 
 
 /**
@@ -19,6 +18,9 @@ import java.util.HashMap;
 public class ResourceLoader {
     private Logger logger;
     private HashMap<String, Image> quickLoader = new HashMap<>();
+    private static final String [] DRONE_RESOURCES =new String[]{"drone01-sm","drone02-sm","drone03-sm"};
+
+    private Random rand=new Random();
 
     private static ResourceLoader loader;
 
@@ -76,6 +78,14 @@ public class ResourceLoader {
             logger.error("missing (" + resourceName + ")");
             return quickLoader.get("error");
         }
+    }
+    public Image loadRandomResource(){
+        return loadResource(getRandomResource());
+    }
+
+    public String getRandomResource(){
+        int index=Math.abs(rand.nextInt(DRONE_RESOURCES.length));
+        return DRONE_RESOURCES[index];
     }
 
 }

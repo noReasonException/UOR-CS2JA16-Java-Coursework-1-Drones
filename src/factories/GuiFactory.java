@@ -46,7 +46,7 @@ public class GuiFactory extends AbstractGuiFactory {
     public GuiMenu getGuiMenu() { return menu==null?menu=new GuiMenu(this,loader):menu; }
 
     @Override
-    public InformationPanel getInformationPanel() { return super.informationPanel==null?informationPanel=new InformationPanel(getEngineFactory().getDatabase()):super.informationPanel; }
+    public InformationPanel getInformationPanel() { return super.informationPanel==null?informationPanel=new InformationPanel(getEngineFactory().getDatabase(),loader):super.informationPanel; }
 
     @Override
     public GuiThread getGuiThread() {

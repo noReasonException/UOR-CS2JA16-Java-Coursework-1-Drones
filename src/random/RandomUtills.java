@@ -5,6 +5,7 @@ import etc.WindowInfo;
 import math.vector.Vector1;
 import math.vector.Vector3;
 
+import java.io.Serializable;
 import java.util.Random;
 import java.util.function.Function;
 
@@ -12,7 +13,7 @@ import java.util.function.Function;
 /***
  * Useful class for generating randomised locations , direction etc
  */
-public class RandomUtills {
+public class RandomUtills  implements Serializable {
     private Random random = new Random();
 
     private WindowInfo windowInfo;

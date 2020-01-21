@@ -6,6 +6,7 @@ import math.vector.Vector3;
 import random.RandomUtills;
 import world.World;
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.Random;
 import java.util.function.Function;
@@ -15,15 +16,15 @@ import java.util.function.Function;
  * This class represents any object that can be handled by the RenderEngine
  *
  */
-abstract public class AbstractObject {
+abstract public class AbstractObject  implements Serializable {
     private Vector3 position;
     private double direction;
     private double velocity;
-    private Image representation;
+    private String representationResourceName;
     private Random rand = new Random();
     private RandomUtills randomUtills;
     private boolean isVisible = true;
-    private int lifes = 10;
+    private int lifes = 10000;
 
     private boolean hasFired = true;
 
@@ -145,18 +146,18 @@ abstract public class AbstractObject {
      * @param representation the image representing this object
      * @param randomUtills the randomUtills object
      */
-    public AbstractObject(Vector3 position, double direction, double velocity, Image representation, RandomUtills randomUtills) {
+    public AbstractObject(Vector3 position, double direction, double velocity, String representation, RandomUtills randomUtills) {
         this.position = position;
         this.direction = direction;
-        this.representation = representation;
+        this.representationResourceName = representation;
         this.velocity = velocity;
         this.randomUtills = randomUtills;
         this.id = (ID += 1);
     }
 
     ///Getters and setters
-    public Image getRepresentation() {
-        return representation;
+    public String getRepresentationResourceName() {
+        return representationResourceName;
     }
 
     public double getVelocity() {
@@ -168,8 +169,8 @@ abstract public class AbstractObject {
         this.velocity = velocity;
     }
 
-    public void setRepresentation(Image representation) {
-        this.representation = representation;
+    public void setRepresentationResourceName(String representationResourceName) {
+        this.representationResourceName = representationResourceName;
     }
 
     public Vector3 getPosition() {

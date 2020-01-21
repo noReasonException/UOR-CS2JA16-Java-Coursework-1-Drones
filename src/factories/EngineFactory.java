@@ -38,7 +38,7 @@ public class EngineFactory extends AbstractEngineFactory {
      */
     @Override
     public Renderer getRenderEngine() {
-        return super.renderer == null ? super.renderer = new Renderer(getDatabase(), gc, getWindowInfo()) : super.renderer;
+        return super.renderer == null ? super.renderer = new Renderer(getDatabase(), gc, getWindowInfo(),loader) : super.renderer;
     }
     /**
      * Creates a singleton instance of World

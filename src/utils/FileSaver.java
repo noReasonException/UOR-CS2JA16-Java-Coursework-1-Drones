@@ -1,4 +1,4 @@
-package logging;
+package utils;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;

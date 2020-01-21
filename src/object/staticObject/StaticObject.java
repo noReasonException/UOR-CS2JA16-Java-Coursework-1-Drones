@@ -11,7 +11,7 @@ import random.RandomUtills;
  * This is an implementation of AbstractObject with constant and final velocity of zero
  */
 public class StaticObject extends AbstractObject {
-    public StaticObject(Vector3 position, double direction, Image representation, RandomUtills randomUtills) {
+    public StaticObject(Vector3 position, double direction, String representation, RandomUtills randomUtills) {
         super(position, direction, 0, representation, randomUtills);
     }
 

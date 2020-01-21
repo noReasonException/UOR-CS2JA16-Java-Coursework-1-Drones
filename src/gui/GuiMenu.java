@@ -5,16 +5,18 @@ import factories.specification.AbstractGuiFactory;
 import gui.windows.*;
 import gui.windows.errors.ErrorDuringExitWindow;
 import gui.windows.errors.ErrorDuringSaveOfLogs;
+import gui.windows.errors.ErrorDuringSimulationSave;
 import gui.windows.success.LogsSavedInfoWindow;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import logging.DefaultLogger;
-import logging.FileSaver;
+import utils.FileSaver;
 import logging.Logger;
+import utils.Serializer;
+import utils.gui.WindowsUtils;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
@@ -68,6 +70,22 @@ public class GuiMenu extends MenuBar {
         b.getItems().add(save);
         b.getItems().add(load);
         b.getItems().add(load_default);
+
+        save.setOnAction(e->{
+            try{
+                Serializer.toFile(WindowsUtils.genFileChooser(),guiFactory.getEngineFactory().getDatabase().asList(),logger);
+            }catch (IOException er){
+                new ErrorDuringSimulationSave(loader).display();
+                logger.error(er);
+            }
+
+        });
+        load.setOnAction(e->{
+            //Serializer.toFile(WindowsUtils.genDirectoryChooser(),guiFactory.getEngineFactory().getDatabase().asList(),logger);
+        });
+        load_default.setOnAction(e -> {
+            guiFactory.getEngineFactory().getDatabase().genDefaultDatabase();
+        });
         return b;
     }
     private Menu getConfigurationMenu(){
@@ -87,7 +105,7 @@ public class GuiMenu extends MenuBar {
         b.getItems().add(clear_logs);
         clear_logs.setOnAction(e->guiFactory.getLogArea().getItems().clear());
         save_logs.setOnAction(e->{
-            String a = WindowsUtils.genFileChooser();
+            String a = WindowsUtils.genDirectoryChooser();
             try{
                 new LogsSavedInfoWindow(loader,FileSaver.saveToFile(a,guiFactory.getLogArea().toString())).display();
             }catch (IOException er){
@@ -112,47 +130,4 @@ public class GuiMenu extends MenuBar {
         });
         return b;
     }
-
-
-    /**
-     * The 'AddDrone' button action handler
-     * uses the Database object to create and subscribe a new Drone into the system
-     */
-    private EventHandler<ActionEvent> addDrone = new EventHandler<ActionEvent>() {
-        @Override
-        public void handle(ActionEvent actionEvent) {
-
-        }
-    };
-    /**
-     * The 'ClearDrones' button action handler
-     * Uses the Database object to clear all the drones and bullets from the system
-     */
-    private EventHandler<ActionEvent> clearDrones = new EventHandler<ActionEvent>() {
-        @Override
-        public void handle(ActionEvent actionEvent) {
-
-        }
-    };
-    /**
-     * The 'Start' Button action handler
-     * Just starts the physicsEngine AnimationTimer Thread
-     */
-    private EventHandler<ActionEvent> start = new EventHandler<ActionEvent>() {
-        @Override
-        public void handle(ActionEvent actionEvent) {
-
-        }
-    };
-
-    /**
-     * The 'Pause' Button action handler
-     * Just stops the physicsEngine AnimationTimer Thread
-     */
-    private EventHandler<ActionEvent> pause = new EventHandler<ActionEvent>() {
-        @Override
-        public void handle(ActionEvent actionEvent) {
-
-        }
-    };
 }

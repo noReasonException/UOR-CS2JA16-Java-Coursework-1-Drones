@@ -2,7 +2,7 @@ package gui;
 
 import database.Database;
 import etc.Updateable;
-import javafx.animation.AnimationTimer;
+import factories.ResourceLoader;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
@@ -11,10 +11,7 @@ import javafx.scene.control.Separator;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import logging.Logger;
 import object.AbstractObject;
-import object.Bullet;
-import object.Drone01;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -29,10 +26,12 @@ public class InformationPanel extends ListView implements Closeable, Updateable 
 
 
 
+    private ResourceLoader loader;
     private Database database;
-    public InformationPanel(Database database) {
+    public InformationPanel(Database database, ResourceLoader loader) {
         setItems(e);
         this.database=database;
+        this.loader=loader;
     }
 
     /**
@@ -44,7 +43,7 @@ public class InformationPanel extends ListView implements Closeable, Updateable 
         HBox v = new HBox();
 
 
-        v.getChildren().add(new ImageView(o.getRepresentation()));
+        v.getChildren().add(new ImageView(loader.loadResource(o.getRepresentationResourceName())));
         v.getChildren().add(new Separator());
         v.getChildren().add(new Label("ID:\t"+o.getId()));
         v.getChildren().add(new Separator());

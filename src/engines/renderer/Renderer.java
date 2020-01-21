@@ -2,7 +2,7 @@ package engines.renderer;
 
 import database.Database;
 import etc.WindowInfo;
-import gui.InformationPanel;
+import factories.ResourceLoader;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -18,6 +18,7 @@ import java.io.IOException;
 public class Renderer extends AnimationTimer implements Closeable {
     private Database dataRef;
     private GraphicsContext gc;
+    private ResourceLoader loader;
     private WindowInfo windowInfo;
 
 
@@ -33,10 +34,11 @@ public class Renderer extends AnimationTimer implements Closeable {
      * @param gc      the GraphicsContent
      * @param windowInfo the windowInfo object , providing information such as window width,height etc
      */
-    public Renderer(Database dataRef, GraphicsContext gc, WindowInfo windowInfo) {
+    public Renderer(Database dataRef, GraphicsContext gc, WindowInfo windowInfo, ResourceLoader loader) {
         this.dataRef = dataRef;
         this.gc = gc;
         this.windowInfo = windowInfo;
+        this.loader=loader;
     }
 
     /**
@@ -96,7 +98,7 @@ public class Renderer extends AnimationTimer implements Closeable {
             AbstractObject every = dataRef.asList().get(i);
             if (every.isVisible()) {
                 drawRotatedImage(gc,
-                                every.getRepresentation(),
+                                loader.loadResource(every.getRepresentationResourceName()),
                                 every.getDirection(),
                                 every.getPosition().getCore().getElement(0),
                                 every.getPosition().getCore().getElement(1));

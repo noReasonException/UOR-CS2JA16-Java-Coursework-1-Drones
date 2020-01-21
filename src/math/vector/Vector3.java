@@ -2,6 +2,7 @@ package math.vector;
 
 import math.vector.etc.LinearlyComplexOps;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -9,7 +10,7 @@ import java.util.stream.Collectors;
 
 import static math.utils.VectorCoreUtils.list3;
 
-public class Vector3 extends Vector implements LinearlyComplexOps<Vector3> {
+public class Vector3 extends Vector implements LinearlyComplexOps<Vector3>, Serializable {
 
 
     /**

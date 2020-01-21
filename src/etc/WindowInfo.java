@@ -1,11 +1,13 @@
 package etc;
 
 
+import java.io.Serializable;
+
 /**
  * This class provides useful information about the screen and the world size(watch out , there is a difference)
  *
  */
-public class WindowInfo {
+public class WindowInfo implements Serializable {
     private int cubeX, cubeY, cubeZ, windowX, windowY, windowZ;
 
     public WindowInfo(int cubeX, int cubeY, int cubeZ, int windowX, int windowY, int windowZ) {

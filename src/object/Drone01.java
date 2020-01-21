@@ -14,6 +14,6 @@ public class Drone01 extends AbstractObject {
      * @param randomUtills the randomUtills object
      */
     public Drone01(Vector3 position, double direction, double velocity, RandomUtills randomUtills) {
-        super(position, direction, velocity, ResourceLoader.siglenton().loadResource("drone01-sm"), randomUtills);
+        super(position, direction, velocity, ResourceLoader.siglenton().getRandomResource(), randomUtills);
     }
 }
