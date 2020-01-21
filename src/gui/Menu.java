@@ -13,6 +13,10 @@ import logging.Logger;
 import java.awt.event.ActionEvent;
 
 
+/***
+ * This is the main menu
+ * just a bunch of buttons with their respective handlers
+ */
 public class Menu extends HBox {
 
     private AbstractEngineFactory engineFactory;
@@ -23,9 +27,12 @@ public class Menu extends HBox {
         this.logger = logger;
     }
 
-    public Menu(AbstractGuiFactory guiFactory, AbstractEngineFactory engineFactory) {
+    /**
+     * The constructior
+     * @param engineFactory the AbstractEngineFactory object , used to manipulate the Database and PhysicsEngine objects
+     */
+    public Menu(AbstractEngineFactory engineFactory) {
         this.engineFactory = engineFactory;
-        this.guiFactory = guiFactory;
 
 
         Button tmp;
@@ -37,10 +44,11 @@ public class Menu extends HBox {
         tmp.setOnMouseClicked(start);
         getChildren().add(tmp = new Button("Pause"));
         tmp.setOnMouseClicked(pause);
-
-
     }
-
+    /**
+     * The 'AddDrone' button action handler
+     * uses the Database object to create and subscribe a new Drone into the system
+     */
     private EventHandler<MouseEvent> addDrone = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent mouseEvent) {
@@ -48,6 +56,10 @@ public class Menu extends HBox {
             logger.info("Drone Added");
         }
     };
+    /**
+     * The 'ClearDrones' button action handler
+     * Uses the Database object to clear all the drones and bullets from the system
+     */
     private EventHandler<MouseEvent> clearDrones = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent mouseEvent) {
@@ -56,6 +68,10 @@ public class Menu extends HBox {
             logger.info("Drones cleared");
         }
     };
+    /**
+     * The 'Start' Button action handler
+     * Just starts the physicsEngine AnimationTimer Thread
+     */
     private EventHandler<MouseEvent> start = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent mouseEvent) {
@@ -63,6 +79,11 @@ public class Menu extends HBox {
             logger.info("Physics Engine Started");
         }
     };
+
+    /**
+     * The 'Pause' Button action handler
+     * Just stops the physicsEngine AnimationTimer Thread
+     */
     private EventHandler<MouseEvent> pause = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent mouseEvent) {

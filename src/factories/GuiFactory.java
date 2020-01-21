@@ -30,7 +30,7 @@ public class GuiFactory extends AbstractGuiFactory {
      */
     @Override
     public Menu getMenu() {
-        return (super.menu == null) ? (super.menu = new Menu(this, getEngineFactory())) : super.menu;
+        return (super.menu == null) ? (super.menu = new Menu(getEngineFactory())) : super.menu;
     }
     /**
      * Creates a singleton instance of AbstractEngineFactory

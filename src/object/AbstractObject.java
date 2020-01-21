@@ -10,6 +10,9 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.function.Function;
 
+/**
+ *
+ */
 abstract public class AbstractObject {
     private Vector3 position;
     private double direction;

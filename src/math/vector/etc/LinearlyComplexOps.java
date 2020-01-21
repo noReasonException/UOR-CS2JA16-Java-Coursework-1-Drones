@@ -1,5 +1,9 @@
 package math.vector.etc;
 
+/**
+ * provides useful operations for a linearly combinable class
+ * @param <A> the type of the class
+ */
 public interface LinearlyComplexOps<A extends LinearlyComplexOps<A>> extends LinearlyCombinable<A> {
 
     A zero();

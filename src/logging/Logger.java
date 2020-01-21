@@ -1,19 +1,11 @@
 package logging;
 
 public interface Logger {
-    default void warn(String s) {
-        System.out.println(s);
-    }
+     void warn(String s);
 
-    default void info(String s) {
-        System.out.println(s);
-    }
+     void info(String s);
 
-    default void error(String s) {
-        System.out.println(s);
-    }
+     void error(String s);
 
-    default void error(Exception e) {
-        System.out.println(e.getMessage());
-    }
+     void error(Exception e);
 }
