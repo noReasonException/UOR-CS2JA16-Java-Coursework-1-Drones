@@ -8,4 +8,5 @@ public interface Logger {
      void error(String s);
 
      void error(Exception e);
+
 }

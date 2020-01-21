@@ -2,6 +2,7 @@ package gui;
 
 import factories.specification.AbstractEngineFactory;
 import factories.specification.AbstractGuiFactory;
+import gui.logarea.LogEntry;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
@@ -19,25 +20,12 @@ import java.io.IOException;
  *
  */
 public class LogArea extends ListView implements Logger , Closeable {
-    private ObservableList<HBox> e = FXCollections.observableArrayList();
+    private ObservableList<LogEntry> e = FXCollections.observableArrayList();
 
     public LogArea() {
         setItems(e);
     }
 
-    /**
-     * Generates a log enrtry
-     * @param prefix the log prefix
-     * @param msg the log message
-     * @return a Hbox to be added to the log list(into the observableList)
-     */
-    public HBox genLog(String prefix, String msg) {
-        HBox v = new HBox();
-        v.getChildren().add(new Label(prefix));
-        v.getChildren().add(new Separator());
-        v.getChildren().add(new Label(msg));
-        return v;
-    }
 
     /**
      * This is a little trick to force javafx to re-draw this entity
@@ -54,7 +42,7 @@ public class LogArea extends ListView implements Logger , Closeable {
      */
     @Override
     public void warn(String s) {
-        e.add(genLog("Warn", s));
+        e.add(new LogEntry("Warn", s));
         update();
     }
 
@@ -64,7 +52,7 @@ public class LogArea extends ListView implements Logger , Closeable {
      */
     @Override
     public void info(String s) {
-        e.add(genLog("Info", s));
+        e.add(new LogEntry("Info", s));
         update();
     }
 
@@ -74,7 +62,7 @@ public class LogArea extends ListView implements Logger , Closeable {
      */
     @Override
     public void error(String s) {
-        e.add(genLog("Error", s));
+        e.add(new LogEntry("Error", s));
         update();
     }
 
@@ -84,7 +72,7 @@ public class LogArea extends ListView implements Logger , Closeable {
      */
     @Override
     public void error(Exception err) {
-        e.add(genLog("Error", err.getMessage()));
+        e.add(new LogEntry("Error", err.getMessage()));
         update();
     }
 
@@ -93,5 +81,10 @@ public class LogArea extends ListView implements Logger , Closeable {
         System.out.println("LogArea terminates itself , logs saved at log.txt");
         //TODO save logs
 
+    }
+
+    @Override
+    public String toString() {
+        return e.stream().map(LogEntry::toString).reduce("",(a,b)->a+b);
     }
 }

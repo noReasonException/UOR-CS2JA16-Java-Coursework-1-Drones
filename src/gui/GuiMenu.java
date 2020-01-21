@@ -1,18 +1,18 @@
 package gui;
 
 import factories.ResourceLoader;
-import factories.specification.AbstractEngineFactory;
 import factories.specification.AbstractGuiFactory;
-import gui.windows.AboutWindow;
-import gui.windows.AbstractInfoWindow;
-import gui.windows.ErrorDuringExitWindow;
-import gui.windows.HelpWindow;
+import gui.windows.*;
+import gui.windows.errors.ErrorDuringExitWindow;
+import gui.windows.errors.ErrorDuringSaveOfLogs;
+import gui.windows.success.LogsSavedInfoWindow;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import logging.DefaultLogger;
+import logging.FileSaver;
 import logging.Logger;
 
 import java.io.IOException;
@@ -86,6 +86,15 @@ public class GuiMenu extends MenuBar {
         b.getItems().add(save_logs);
         b.getItems().add(clear_logs);
         clear_logs.setOnAction(e->guiFactory.getLogArea().getItems().clear());
+        save_logs.setOnAction(e->{
+            String a = WindowsUtils.genFileChooser();
+            try{
+                new LogsSavedInfoWindow(loader,FileSaver.saveToFile(a,guiFactory.getLogArea().toString())).display();
+            }catch (IOException er){
+                new ErrorDuringSaveOfLogs(loader).display();
+            }
+
+        });
 
         return b;
     }

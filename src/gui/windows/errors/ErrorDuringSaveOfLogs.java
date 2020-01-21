@@ -1,11 +1,11 @@
-package gui.windows;
+package gui.windows.errors;
 
 import factories.ResourceLoader;
+import gui.windows.AbstractInfoWindow;
 import javafx.scene.image.Image;
 
-public class ErrorDuringExitWindow extends AbstractInfoWindow {
-
-    public ErrorDuringExitWindow(ResourceLoader loader) {
+public class ErrorDuringSaveOfLogs extends AbstractInfoWindow {
+    public ErrorDuringSaveOfLogs(ResourceLoader loader) {
         super(loader);
     }
 
@@ -21,6 +21,6 @@ public class ErrorDuringExitWindow extends AbstractInfoWindow {
 
     @Override
     protected String getText() {
-        return "An unexpected error happened during exit \nlog or configuration files may broke as a result";
+        return "An unexpected error happened during log save \nlog file may broke as a result";
     }
 }
