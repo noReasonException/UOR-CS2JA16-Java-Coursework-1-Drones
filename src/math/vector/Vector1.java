@@ -8,9 +8,13 @@ import java.util.List;
 public class Vector1 extends Vector implements LinearlyComplexOps<Vector1> {
 
     @Override
-    public Double magnitude() { return core.length(); }
+    public Double magnitude() {
+        return core.length();
+    }
 
-    public Vector1 zero() { return new Vector1(core.toZero()); }
+    public Vector1 zero() {
+        return new Vector1(core.toZero());
+    }
 
     public int dimension() {
         return 1;
@@ -24,13 +28,19 @@ public class Vector1 extends Vector implements LinearlyComplexOps<Vector1> {
         return new Vector1(core.scalar(scalar));
     }
 
-    public Double dot(Vector1 any){ return core.dot(any.core); }
-
-    public Vector1(List<Double> elements) {
-        super(new VectorCore(elements,1));
+    public Double dot(Vector1 any) {
+        return core.dot(any.core);
     }
 
-    public Vector1(VectorCore core) { super(core); }
+    public Vector1(List<Double> elements) {
+        super(new VectorCore(elements, 1));
+    }
 
-    public Vector1(double x) { super(new VectorCore(VectorCoreUtils.list1(x),1));}
+    public Vector1(VectorCore core) {
+        super(core);
+    }
+
+    public Vector1(double x) {
+        super(new VectorCore(VectorCoreUtils.list1(x), 1));
+    }
 }

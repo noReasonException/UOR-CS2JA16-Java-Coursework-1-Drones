@@ -1,6 +1,7 @@
 
 import database.Database;
 import engines.physicsengine.PhysicsEngine;
+import etc.WindowInfo;
 import factories.EngineFactory;
 import factories.GuiFactory;
 import factories.ResourceLoader;
@@ -27,15 +28,16 @@ import java.util.ArrayList;
 
 public class GuiMain extends Application {
     public static void main(String[] args) {
-       launch(args);
+        launch(args);
 
     }
 
+    private WindowInfo windowInfo;
     private AbstractEngineFactory engineFactory;
     private AbstractGuiFactory guiFactory;
     private ResourceLoader loader;
     private Logger globalLogger;
-    double x=0d,y=0d,angle=0d;
+    double x = 0d, y = 0d, angle = 0d;
 
     public double getX() {
         return x;
@@ -61,20 +63,33 @@ public class GuiMain extends Application {
         this.angle = angle;
     }
 
-    public void initializeFactories(){
-        try{
+    public void initializeFactories() {
+        try {
 
 
-            this.loader=new ResourceLoader(globalLogger);
-            this.engineFactory=new EngineFactory(50,50,50,500,500,500,loader);
-            this.guiFactory=new GuiFactory(engineFactory);
+            this.windowInfo = new WindowInfo(50, 50, 50, 500, 500, 720);
+            this.loader = ResourceLoader.siglentonInitializer();
 
-            this.globalLogger=this.guiFactory.getLogArea();
-        }catch (FileNotFoundException e){
+            this.engineFactory = new EngineFactory(windowInfo, loader);
+
+            this.guiFactory = new GuiFactory(engineFactory);
+
+            this.globalLogger = this.guiFactory.getLogArea();
+
+        } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
-    public void render(){
+
+    public void initializeLoggers() {
+        this.engineFactory.physicsEngine().setLogger(guiFactory.getLogArea());
+        this.engineFactory.renderEngine().setLogger(guiFactory.getLogArea());
+        this.engineFactory.world().setLogger(guiFactory.getLogArea());
+        this.guiFactory.getMenu().setLogger(guiFactory.getLogArea());
+        this.loader.setLogger(guiFactory.getLogArea());
+    }
+
+    public void render() {
         engineFactory.renderEngine().start();
         engineFactory.physicsEngine().start();
     }
@@ -83,23 +98,23 @@ public class GuiMain extends Application {
     @Override
     public void start(Stage theStage) {
         initializeFactories();
-        theStage.setTitle( "ru020363" );
+
+        theStage.setTitle("ru020363");
 
         BorderPane root = new BorderPane();
-        Scene theScene = new Scene( root );
-        theStage.setScene( theScene );
+        Scene theScene = new Scene(root);
+        theStage.setScene(theScene);
 
-        Canvas canvas = new Canvas( 500, 500 );
+        Canvas canvas = new Canvas(500, 500);
 
         root.setCenter(canvas);
 
 
-        root.setRight(guiFactory.getInfoArea());
         root.setLeft(guiFactory.getLogArea());
         root.setBottom(guiFactory.getMenu());
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        ((EngineFactory)engineFactory).setGc(gc);
+        ((EngineFactory) engineFactory).setGc(gc);
         render();
 
 
@@ -107,6 +122,7 @@ public class GuiMain extends Application {
         theStage.setScene(theScene);
 
 
+        initializeLoggers();
         theStage.show();
 
 

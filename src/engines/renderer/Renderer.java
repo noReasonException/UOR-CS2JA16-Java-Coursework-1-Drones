@@ -1,28 +1,60 @@
 package engines.renderer;
 
 import database.Database;
+import etc.WindowInfo;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.transform.Rotate;
+import logging.DefaultLogger;
+import logging.Logger;
 import object.AbstractObject;
+
 
 public class Renderer extends AnimationTimer {
     private Database dataRef;
     private GraphicsContext gc;
-    private int windowSizeX,windowSizeY;
+    private WindowInfo windowInfo;
 
 
-    public Renderer(Database dataRef, GraphicsContext gc,int windowSizeX,int windowSizeY) {
-        this.dataRef = dataRef;
-        this.gc=gc;
-        this.windowSizeX=windowSizeX;
-        this.windowSizeY=windowSizeY;
+    private Logger logger = new DefaultLogger();
+
+    public void setLogger(Logger logger) {
+        this.logger = logger;
     }
+
+    /**
+     * The constructor
+     * @param dataRef a reference of the database object
+     * @param gc      the GraphicsContent
+     * @param windowInfo the windowInfo object , providing information such as window width,height etc
+     */
+    public Renderer(Database dataRef, GraphicsContext gc, WindowInfo windowInfo) {
+        this.dataRef = dataRef;
+        this.gc = gc;
+        this.windowInfo = windowInfo;
+    }
+
+    /**
+     * Rotate the whole canvas by specific angle by the points px,py
+     * @param gc the graphicsContent
+     * @param angle the angle in degrees
+     * @param px the pivot point x
+     * @param py the pivot point y
+     */
     private void rotate(GraphicsContext gc, double angle, double px, double py) {
         Rotate r = new Rotate(angle, px, py);
         gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
     }
+
+    /**
+     * Draws a given image , rotated by specific angles , though the points tlpx,tlpy
+     * @param gc        The GraphicsContent(2D)
+     * @param image     The image object
+     * @param angle     The angle (0<=x<=360)
+     * @param tlpx      the pivot point x
+     * @param tlpy      the pivot point y
+     */
     private void drawRotatedImage(GraphicsContext gc, Image image, double angle, double tlpx, double tlpy) {
         gc.save(); // saves the current state on stack, including the current transform
         rotate(gc, fromJavafxAngleToMathAngle(angle), tlpx + image.getWidth() / 2, tlpy + image.getHeight() / 2);
@@ -30,22 +62,36 @@ public class Renderer extends AnimationTimer {
         gc.restore(); // back to original state (before rotation)
     }
 
-    private double fromJavafxAngleToMathAngle(double angle){
-        return angle+90;
+    /**
+     * Our engine uses different resting point for 0 degrees , so we need to rotate every image by a constant
+     * @param angle the angle , expressed in our engine system
+     * @return the angle , expressed in javafx angles
+     */
+    private double fromJavafxAngleToMathAngle(double angle) {
+        return angle + 90;
 
     }
-    private void clearCanvas(){
-        gc.clearRect(0, 0, windowSizeX, windowSizeY);
+
+    /**
+     * Clears the canvas , by drawing a big rectangle in the screen
+     */
+    private void clearCanvas() {
+        gc.clearRect(0, 0, windowInfo.getWindowX(), windowInfo.getWindowY());
     }
 
+    /**
+     * The main rendrerers mainloop
+     * in each frame
+     * @param l
+     */
     @Override
     public void handle(long l) {
         clearCanvas();
 
         for (int i = 0; i < dataRef.asList().size(); i++) {
             AbstractObject every = dataRef.asList().get(i);
-            if(every.isVisible()){
-                drawRotatedImage(gc,every.getRepresentation(),every.getDirection(),every.getPosition().getCore().getElement(0),every.getPosition().getCore().getElement(1));
+            if (every.isVisible()) {
+                drawRotatedImage(gc, every.getRepresentation(), every.getDirection(), every.getPosition().getCore().getElement(0), every.getPosition().getCore().getElement(1));
             }
 
         }

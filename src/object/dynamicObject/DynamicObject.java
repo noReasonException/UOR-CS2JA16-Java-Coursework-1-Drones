@@ -10,6 +10,6 @@ import random.RandomUtills;
 public class DynamicObject extends AbstractObject {
 
     public DynamicObject(Vector3 position, double direction, double velocity, Image representation, RandomUtills randomUtills) {
-        super(position, direction,velocity, representation,randomUtills);
+        super(position, direction, velocity, representation, randomUtills);
     }
 }

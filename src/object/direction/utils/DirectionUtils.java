@@ -7,20 +7,23 @@ import java.util.Map;
 
 
 public class DirectionUtils {
-    public static double directionToRadians(Vector2 direction){
+    public static double directionToRadians(Vector2 direction) {
         Vector2 norm = direction.norm();
 
-        Vector2 i_hat = new Vector2(1,0);
+        Vector2 i_hat = new Vector2(1, 0);
 
 
         System.out.println(norm.toString());
 
-        switch (direction.getQuantrant()){
+        switch (direction.getQuantrant()) {
             case First:
-            case Second:return norm.angle(i_hat);
+            case Second:
+                return norm.angle(i_hat);
             case Third:
-            case Fourth:return (2*Math.PI -norm.angle(i_hat));
-            default:return 0;//unreachable , but java sucks
+            case Fourth:
+                return (2 * Math.PI - norm.angle(i_hat));
+            default:
+                return 0;//unreachable , but java sucks
         }
 
 
