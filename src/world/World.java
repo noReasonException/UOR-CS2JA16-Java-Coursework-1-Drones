@@ -7,6 +7,8 @@ import math.vector.Vector;
 import math.vector.Vector3;
 import object.AbstractObject;
 
+import java.io.Closeable;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -15,7 +17,7 @@ import java.util.Random;
  * The world map object
  * keeps track of all objects in the game , detects collisions etc
  */
-public class World {
+public class World implements Closeable {
     private HashMap<Vector3, AbstractObject> data;
     private WindowInfo windowInfo;
     private Random randint = new Random();
@@ -114,5 +116,9 @@ public class World {
         }
     }
 
-
+    @Override
+    public void close() throws IOException {
+        this.data.clear();
+        logger.info("WorldMap object terminates itself");
+    }
 }

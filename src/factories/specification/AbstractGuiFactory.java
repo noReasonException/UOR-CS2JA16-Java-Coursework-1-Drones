@@ -1,17 +1,23 @@
 package factories.specification;
 
+import gui.GuiMenu;
 import gui.LogArea;
-import gui.Menu;
+import gui.ToolArea;
+import logging.Logger;
+
+import java.io.Closeable;
+import java.io.IOException;
 
 /***
  * This is the AbstractGuiFactory
  * takes care of D.I in this project , from the GUI side(javafx) , providing us with every gui object we want
  */
-abstract public class AbstractGuiFactory {
+abstract public class AbstractGuiFactory implements Closeable {
 
     protected LogArea logArea;
-    protected Menu menu;
+    protected ToolArea toolArea;
     protected AbstractEngineFactory engineFactory;
+    protected GuiMenu menu;
     /**
      * Creates a singleton instance of LogArea
      * @return a singleton LogArea Object
@@ -21,10 +27,24 @@ abstract public class AbstractGuiFactory {
      * Creates a singleton instance of Menu
      * @return a singleton Menu Object
      */
-    abstract public Menu getMenu();
+    abstract public ToolArea getToolArea();
     /**
      * Creates a singleton instance of AbstractEngineFactory
-     * @return a singleton Database AbstractEngineFactory
+     * @return a singleton AbstractEngineFactory Object
      */
     abstract public AbstractEngineFactory getEngineFactory();
+
+    /**
+     * Creates a singleton instance of GuiMenu
+     * @return a singleton GuiMenu Object
+     */
+    abstract public GuiMenu getGuiMenu();
+
+    @Override
+    public void close() throws IOException {
+        System.out.println("Gui factory terminates itself");
+        getEngineFactory().close();
+        getLogArea().close();
+
+    }
 }

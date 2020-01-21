@@ -58,10 +58,10 @@ public class GuiMain extends Application {
      * Assigns in each Loggable module a the Gui logger
      */
     public void initializeLoggers() {
-        this.engineFactory.physicsEngine().setLogger(guiFactory.getLogArea());
-        this.engineFactory.renderEngine().setLogger(guiFactory.getLogArea());
-        this.engineFactory.world().setLogger(guiFactory.getLogArea());
-        this.guiFactory.getMenu().setLogger(guiFactory.getLogArea());
+        this.engineFactory.getPhysicsEngine().setLogger(guiFactory.getLogArea());
+        this.engineFactory.getRenderEngine().setLogger(guiFactory.getLogArea());
+        this.engineFactory.getWorldMap().setLogger(guiFactory.getLogArea());
+        this.guiFactory.getToolArea().setLogger(guiFactory.getLogArea());
         this.loader.setLogger(guiFactory.getLogArea());
     }
 
@@ -69,8 +69,8 @@ public class GuiMain extends Application {
      * starts the RenderEngine and the PhysicsEngine
      */
     public void render() {
-        engineFactory.renderEngine().start();
-        engineFactory.physicsEngine().start();
+        engineFactory.getRenderEngine().start();
+        engineFactory.getPhysicsEngine().start();
     }
 
 
@@ -93,8 +93,9 @@ public class GuiMain extends Application {
         root.setCenter(canvas);
 
 
+        root.setTop(guiFactory.getGuiMenu());
         root.setLeft(guiFactory.getLogArea());
-        root.setBottom(guiFactory.getMenu());
+        root.setBottom(guiFactory.getToolArea());
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
         ((EngineFactory) engineFactory).setGc(gc);

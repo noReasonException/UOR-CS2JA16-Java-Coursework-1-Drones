@@ -10,8 +10,11 @@ import logging.DefaultLogger;
 import logging.Logger;
 import object.AbstractObject;
 
+import java.io.Closeable;
+import java.io.IOException;
 
-public class Renderer extends AnimationTimer {
+
+public class Renderer extends AnimationTimer implements Closeable {
     private Database dataRef;
     private GraphicsContext gc;
     private WindowInfo windowInfo;
@@ -99,5 +102,11 @@ public class Renderer extends AnimationTimer {
             }
 
         }
+    }
+
+    @Override
+    public void close() throws IOException {
+        this.logger.info("Renderer Thread terminates itself ");
+        this.stop();
     }
 }

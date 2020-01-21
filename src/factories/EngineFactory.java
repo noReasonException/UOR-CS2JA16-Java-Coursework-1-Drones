@@ -6,11 +6,8 @@ import engines.renderer.Renderer;
 import etc.WindowInfo;
 import factories.specification.AbstractEngineFactory;
 import javafx.scene.canvas.GraphicsContext;
-import object.AbstractObject;
 import random.RandomUtills;
 import world.World;
-
-import java.awt.*;
 
 public class EngineFactory extends AbstractEngineFactory {
 
@@ -32,23 +29,23 @@ public class EngineFactory extends AbstractEngineFactory {
      * @return a singleton PhysicsEngine Object
      */
     @Override
-    public PhysicsEngine physicsEngine() {
-        return super.physicsEngine == null ? super.physicsEngine = new PhysicsEngine(getData(), world()) : super.physicsEngine;
+    public PhysicsEngine getPhysicsEngine() {
+        return super.physicsEngine == null ? super.physicsEngine = new PhysicsEngine(getDatabase(), getWorldMap()) : super.physicsEngine;
     }
     /**
      * Creates a singleton instance of Renderer
      * @return a singleton Renderer Object
      */
     @Override
-    public Renderer renderEngine() {
-        return super.renderer == null ? super.renderer = new Renderer(getData(), gc, getWindowInfo()) : super.renderer;
+    public Renderer getRenderEngine() {
+        return super.renderer == null ? super.renderer = new Renderer(getDatabase(), gc, getWindowInfo()) : super.renderer;
     }
     /**
      * Creates a singleton instance of World
      * @return a singleton World Object
      */
     @Override
-    public World world() {
+    public World getWorldMap() {
         return super.world == null ? super.world = new World(getWindowInfo()) : super.world;
     }
     /**
@@ -56,8 +53,8 @@ public class EngineFactory extends AbstractEngineFactory {
      * @return a singleton Database Object
      */
     @Override
-    public Database getData() {
-        return super.data == null ? super.data = new Database(getRandomUtills(), world()) : super.data;
+    public Database getDatabase() {
+        return super.data == null ? super.data = new Database(getRandomUtills(), getWorldMap(),getLogger()) : super.data;
     }
     /**
      * Creates a singleton instance of RandomUtills
@@ -88,4 +85,5 @@ public class EngineFactory extends AbstractEngineFactory {
     public WindowInfo getWindowInfo() {
         return windowInfo;
     }
+
 }

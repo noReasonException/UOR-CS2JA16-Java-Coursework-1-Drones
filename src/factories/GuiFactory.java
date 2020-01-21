@@ -3,8 +3,9 @@ package factories;
 import etc.WindowInfo;
 import factories.specification.AbstractEngineFactory;
 import factories.specification.AbstractGuiFactory;
+import gui.GuiMenu;
 import gui.LogArea;
-import gui.Menu;
+import gui.ToolArea;
 
 public class GuiFactory extends AbstractGuiFactory {
 
@@ -29,8 +30,8 @@ public class GuiFactory extends AbstractGuiFactory {
      * @return a singleton Menu Object
      */
     @Override
-    public Menu getMenu() {
-        return (super.menu == null) ? (super.menu = new Menu(getEngineFactory())) : super.menu;
+    public ToolArea getToolArea() {
+        return (super.toolArea == null) ? (super.toolArea = new ToolArea(getEngineFactory())) : super.toolArea;
     }
     /**
      * Creates a singleton instance of AbstractEngineFactory
@@ -38,4 +39,7 @@ public class GuiFactory extends AbstractGuiFactory {
      */
     @Override
     public AbstractEngineFactory getEngineFactory() {return super.engineFactory==null?(super.engineFactory=new EngineFactory(this.windowInfo,this.loader)):super.engineFactory;}
+
+    @Override
+    public GuiMenu getGuiMenu() { return menu==null?menu=new GuiMenu(this,loader):menu; }
 }

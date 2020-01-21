@@ -3,6 +3,7 @@ package database;
 import etc.Constants;
 import factories.ResourceLoader;
 import javafx.scene.image.Image;
+import logging.Logger;
 import math.vector.Vector;
 import math.vector.Vector3;
 import object.AbstractObject;
@@ -11,6 +12,8 @@ import object.Drone01;
 import random.RandomUtills;
 import world.World;
 
+import java.io.Closeable;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -20,21 +23,23 @@ import java.util.Random;
 /**
  * This is the main on-memory data repository
  */
-public class Database {
+public class Database implements Closeable {
 
     protected List<AbstractObject> data = Collections.synchronizedList(new ArrayList<AbstractObject>());
     protected RandomUtills u;
     protected Random random = new Random();
     protected World w;
+    protected Logger logger;
 
     /***
      * The constructor
      * @param u the RandomUtills instance , useful for calculating initial locations
      * @param w the World object
      */
-    public Database(RandomUtills u, World w) {
+    public Database(RandomUtills u, World w, Logger logger) {
         this.u = u;
         this.w = w;
+        this.logger=logger;
     }
 
     /**
@@ -92,5 +97,11 @@ public class Database {
     public void deleteObject(AbstractObject b) {
         asList().remove(b);
         w.eraseObject(b);
+    }
+
+    @Override
+    public void close() throws IOException {
+        logger.info("Database object terminates itself");
+        //TODO save configuration
     }
 }

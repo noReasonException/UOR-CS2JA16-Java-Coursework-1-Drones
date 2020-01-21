@@ -6,18 +6,15 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-import jdk.jfr.Event;
 import logging.DefaultLogger;
 import logging.Logger;
-
-import java.awt.event.ActionEvent;
 
 
 /***
  * This is the main menu
  * just a bunch of buttons with their respective handlers
  */
-public class Menu extends HBox {
+public class ToolArea extends HBox {
 
     private AbstractEngineFactory engineFactory;
     private AbstractGuiFactory guiFactory;
@@ -31,7 +28,7 @@ public class Menu extends HBox {
      * The constructior
      * @param engineFactory the AbstractEngineFactory object , used to manipulate the Database and PhysicsEngine objects
      */
-    public Menu(AbstractEngineFactory engineFactory) {
+    public ToolArea(AbstractEngineFactory engineFactory) {
         this.engineFactory = engineFactory;
 
 
@@ -52,7 +49,7 @@ public class Menu extends HBox {
     private EventHandler<MouseEvent> addDrone = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent mouseEvent) {
-            engineFactory.getData().addDrone();
+            engineFactory.getDatabase().addDrone();
             logger.info("Drone Added");
         }
     };
@@ -63,8 +60,8 @@ public class Menu extends HBox {
     private EventHandler<MouseEvent> clearDrones = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent mouseEvent) {
-            engineFactory.getData().asList().clear();
-            engineFactory.world().getData().clear();
+            engineFactory.getDatabase().asList().clear();
+            engineFactory.getWorldMap().getData().clear();
             logger.info("Drones cleared");
         }
     };
@@ -75,7 +72,7 @@ public class Menu extends HBox {
     private EventHandler<MouseEvent> start = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent mouseEvent) {
-            engineFactory.physicsEngine().start();
+            engineFactory.getPhysicsEngine().start();
             logger.info("Physics Engine Started");
         }
     };
@@ -87,7 +84,7 @@ public class Menu extends HBox {
     private EventHandler<MouseEvent> pause = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent mouseEvent) {
-            engineFactory.physicsEngine().stop();
+            engineFactory.getPhysicsEngine().stop();
             logger.info("Physics Engine Stopped");
         }
     };

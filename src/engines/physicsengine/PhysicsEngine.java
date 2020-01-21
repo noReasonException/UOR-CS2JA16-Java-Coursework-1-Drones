@@ -9,6 +9,9 @@ import math.vector.Vector3;
 import object.AbstractObject;
 import world.World;
 
+import java.io.Closeable;
+import java.io.IOException;
+
 
 /***
  * This is the Physics engine
@@ -17,7 +20,7 @@ import world.World;
  *          if there is any collision , calls the nesessary handlers
  *
  */
-public class PhysicsEngine extends AnimationTimer {
+public class PhysicsEngine extends AnimationTimer implements Closeable {
     private Database dataRef;
     private World world;
 
@@ -107,5 +110,11 @@ public class PhysicsEngine extends AnimationTimer {
                 }
             }
         }
+    }
+
+    @Override
+    public void close() throws IOException {
+        this.logger.info("Physics Engine Thread terminates itself");
+        this.stop();
     }
 }

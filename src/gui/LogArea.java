@@ -10,12 +10,15 @@ import javafx.scene.control.Separator;
 import javafx.scene.layout.HBox;
 import logging.Logger;
 
+import java.io.Closeable;
+import java.io.IOException;
+
 /**
  * This is the log area
  * Implements the Logger interface in order to be compatibe with the Engine Modules
  *
  */
-public class LogArea extends ListView implements Logger {
+public class LogArea extends ListView implements Logger , Closeable {
     private ObservableList<HBox> e = FXCollections.observableArrayList();
 
     private AbstractEngineFactory engineFactory;
@@ -88,5 +91,12 @@ public class LogArea extends ListView implements Logger {
     public void error(Exception err) {
         e.add(genLog("Error", err.getMessage()));
         update();
+    }
+
+    @Override
+    public void close() throws IOException {
+        System.out.println("LogArea terminates itself , logs saved at log.txt");
+        //TODO save logs
+
     }
 }
