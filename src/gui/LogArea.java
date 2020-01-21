@@ -21,13 +21,8 @@ import java.io.IOException;
 public class LogArea extends ListView implements Logger , Closeable {
     private ObservableList<HBox> e = FXCollections.observableArrayList();
 
-    private AbstractEngineFactory engineFactory;
-    private AbstractGuiFactory guiFactory;
-
-    public LogArea(AbstractGuiFactory guiFactory, AbstractEngineFactory engineFactory) {
+    public LogArea() {
         setItems(e);
-        this.guiFactory = guiFactory;
-        this.engineFactory = engineFactory;
     }
 
     /**

@@ -1,8 +1,10 @@
 package factories.specification;
 
 import gui.GuiMenu;
+import gui.InformationPanel;
 import gui.LogArea;
 import gui.ToolArea;
+import gui.threads.GuiThread;
 import logging.Logger;
 
 import java.io.Closeable;
@@ -18,6 +20,8 @@ abstract public class AbstractGuiFactory implements Closeable {
     protected ToolArea toolArea;
     protected AbstractEngineFactory engineFactory;
     protected GuiMenu menu;
+    protected InformationPanel informationPanel;
+    protected GuiThread guiThread;
     /**
      * Creates a singleton instance of LogArea
      * @return a singleton LogArea Object
@@ -39,6 +43,17 @@ abstract public class AbstractGuiFactory implements Closeable {
      * @return a singleton GuiMenu Object
      */
     abstract public GuiMenu getGuiMenu();
+
+    /**
+     * Creates a singleton instance of InformationPanel
+     * @return a singleton InformationPanel Object
+     */
+    abstract public InformationPanel getInformationPanel();
+    /**
+     * Creates a singleton instance of GuiThread
+     * @return a singleton GuiThread Object
+     */
+    abstract public GuiThread getGuiThread();
 
     @Override
     public void close() throws IOException {

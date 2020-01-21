@@ -28,8 +28,9 @@ public class ToolArea extends HBox {
      * The constructior
      * @param engineFactory the AbstractEngineFactory object , used to manipulate the Database and PhysicsEngine objects
      */
-    public ToolArea(AbstractEngineFactory engineFactory) {
-        this.engineFactory = engineFactory;
+    public ToolArea(AbstractGuiFactory guiFactory) {
+        this.engineFactory = guiFactory.getEngineFactory();
+        this.guiFactory = guiFactory;
 
 
         Button tmp;
@@ -73,7 +74,9 @@ public class ToolArea extends HBox {
         @Override
         public void handle(MouseEvent mouseEvent) {
             engineFactory.getPhysicsEngine().start();
+            guiFactory.getGuiThread().start();
             logger.info("Physics Engine Started");
+            logger.info("Information panel thread Stopped");
         }
     };
 
@@ -85,7 +88,9 @@ public class ToolArea extends HBox {
         @Override
         public void handle(MouseEvent mouseEvent) {
             engineFactory.getPhysicsEngine().stop();
+            guiFactory.getGuiThread().stop();
             logger.info("Physics Engine Stopped");
+            logger.info("Information panel thread Stopped");
         }
     };
 }

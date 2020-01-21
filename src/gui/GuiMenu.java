@@ -38,6 +38,7 @@ public class GuiMenu extends MenuBar {
         getMenus().add(getFileMenu());
         getMenus().add(getSimulationMenu());
         getMenus().add(getConfigurationMenu());
+        getMenus().add(getLogMenu());
         getMenus().add(getHelpMenu());
 
 
@@ -59,12 +60,33 @@ public class GuiMenu extends MenuBar {
     }
     private Menu getSimulationMenu(){
         Menu b = new Menu("Simulation");
-        b.getItems().add(new MenuItem("Exit"));
+
+        MenuItem save = new MenuItem("Save");
+        MenuItem load = new MenuItem("Load");
+        MenuItem load_default = new MenuItem("Load Default");
+
+        b.getItems().add(save);
+        b.getItems().add(load);
+        b.getItems().add(load_default);
         return b;
     }
     private Menu getConfigurationMenu(){
         Menu b = new Menu("Configuration");
-        b.getItems().add(new MenuItem("Exit"));
+        MenuItem edit_default = new MenuItem("Edit Default");
+        MenuItem editor = new MenuItem("Editor");
+        b.getItems().add(edit_default);
+        b.getItems().add(editor);
+        return b;
+    }
+
+    private Menu getLogMenu(){
+        Menu b = new Menu("Logs");
+        MenuItem save_logs = new MenuItem("Save Logs");
+        MenuItem clear_logs = new MenuItem("Clear Logs");
+        b.getItems().add(save_logs);
+        b.getItems().add(clear_logs);
+        clear_logs.setOnAction(e->guiFactory.getLogArea().getItems().clear());
+
         return b;
     }
     private Menu getHelpMenu(){

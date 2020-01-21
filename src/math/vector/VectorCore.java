@@ -131,7 +131,7 @@ public class VectorCore {
 
     @Override
     public String toString() {
-        return "Vector" + dimension + " Object : " + "(" + Arrays.toString(data.toArray()).replace("[", "").replace("]", "") + ")";
+        return Arrays.toString(data.toArray()).replace("[", "").replace("]", "") + ")";
     }
 
     /**

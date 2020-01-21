@@ -2,6 +2,7 @@ package engines.renderer;
 
 import database.Database;
 import etc.WindowInfo;
+import gui.InformationPanel;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -102,6 +103,7 @@ public class Renderer extends AnimationTimer implements Closeable {
             }
 
         }
+
     }
 
     @Override

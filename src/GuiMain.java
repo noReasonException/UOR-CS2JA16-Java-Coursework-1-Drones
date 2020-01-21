@@ -68,9 +68,10 @@ public class GuiMain extends Application {
     /**
      * starts the RenderEngine and the PhysicsEngine
      */
-    public void render() {
+    public void startThreads() {
         engineFactory.getRenderEngine().start();
         engineFactory.getPhysicsEngine().start();
+        guiFactory.getGuiThread().start();
     }
 
 
@@ -96,10 +97,11 @@ public class GuiMain extends Application {
         root.setTop(guiFactory.getGuiMenu());
         root.setLeft(guiFactory.getLogArea());
         root.setBottom(guiFactory.getToolArea());
+        root.setRight(guiFactory.getInformationPanel());
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
         ((EngineFactory) engineFactory).setGc(gc);
-        render();
+        startThreads();
 
 
         theScene.setRoot(root);
