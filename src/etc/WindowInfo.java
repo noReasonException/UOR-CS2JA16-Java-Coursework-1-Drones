@@ -57,4 +57,8 @@ public class WindowInfo implements Serializable {
     public void setWindowY(int windowY) {
         this.windowY = windowY;
     }
+
+    public static WindowInfo genDefault(){
+        return  new WindowInfo(50, 50, 500, 500);
+    }
 }

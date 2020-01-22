@@ -97,8 +97,7 @@ public class World implements Closeable {
      * @param ab the issuing AbstractObject
      */
     public void eraseObject(AbstractObject ab) {
-        data.remove(ab.getPosition(), ab);
-        logger.info(ab.toString() + " erased from mem");
+        data.remove(toWorldCoordinates(ab.getPosition()), ab);
     }
 
     /**

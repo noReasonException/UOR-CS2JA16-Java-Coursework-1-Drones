@@ -98,9 +98,14 @@ public class VectorCore implements Serializable {
      * @param secondVector the second vector to compare
      * @return 0 equals or 1 otherwise
      */
-    public int compareTo(VectorCore secondVector) {
-        return Arrays.equals(data.toArray(), secondVector.data.toArray()) ? 0 : 1;
+    @Override
+    public boolean equals(Object secondVector) {
+        if(secondVector instanceof VectorCore){
+            return Arrays.equals(data.toArray(), ((VectorCore)secondVector).data.toArray());
+        }
+        return false;
     }
+
 
     /**
      * get particular element of the list

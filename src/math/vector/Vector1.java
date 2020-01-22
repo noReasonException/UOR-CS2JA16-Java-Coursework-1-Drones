@@ -87,4 +87,5 @@ public class Vector1 extends Vector implements LinearlyComplexOps<Vector1> {
     public Vector1(double x) {
         super(new VectorCore(VectorCoreUtils.list1(x), 1));
     }
+
 }

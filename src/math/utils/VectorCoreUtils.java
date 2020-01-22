@@ -13,14 +13,7 @@ import java.util.stream.Collectors;
  */
 public class VectorCoreUtils {
 
-    /**
-     * Generates a zero vector of same size , as the parameter given
-     * @param core the given vector
-     * @return a zero vector
-     */
-    static VectorCore zeroVector(VectorCore core) {
-        return new VectorCore(core.getData().stream().map(i -> 0d).collect(Collectors.toList()), core.getDimension());
-    }
+
 
     /**
      * The absolute distance between the origin and the points given as parameters
