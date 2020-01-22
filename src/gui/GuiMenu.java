@@ -41,7 +41,6 @@ public class GuiMenu extends MenuBar {
         this.loader=loader;
         getMenus().add(getFileMenu());
         getMenus().add(getSimulationMenu());
-        getMenus().add(getConfigurationMenu());
         getMenus().add(getLogMenu());
         getMenus().add(getHelpMenu());
 
@@ -101,14 +100,6 @@ public class GuiMenu extends MenuBar {
         load_default.setOnAction(e -> {
             guiFactory.getEngineFactory().getDatabase().genDefaultDatabase();
         });
-        return b;
-    }
-    private Menu getConfigurationMenu(){
-        Menu b = new Menu("Configuration");
-        MenuItem edit_default = new MenuItem("Edit Default");
-        MenuItem editor = new MenuItem("Editor");
-        b.getItems().add(edit_default);
-        b.getItems().add(editor);
         return b;
     }
 

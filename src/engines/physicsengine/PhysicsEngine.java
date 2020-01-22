@@ -95,7 +95,7 @@ public class PhysicsEngine extends AnimationTimer implements Closeable {
             if (b.isVisible()) {
 
                 if (world.collision(b, v)) {
-                    System.out.println("Collision");
+                    logger.info(b.getId()+" Collision with "+(world.getData().get(v)==null?"Wall":world.getData().get(v).getId()));
                     if (b.collisionEventHandler().apply(fov)) {//if true then is dead
                         b.setVisible(false);
                         dataRef.deleteObject(b);

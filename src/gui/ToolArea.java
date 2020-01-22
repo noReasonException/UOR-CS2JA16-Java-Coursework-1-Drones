@@ -3,7 +3,9 @@ package gui;
 import factories.specification.AbstractEngineFactory;
 import factories.specification.AbstractGuiFactory;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Separator;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import logging.DefaultLogger;
@@ -33,17 +35,24 @@ public class ToolArea extends HBox {
         this.guiFactory = guiFactory;
 
 
+        setAlignment(Pos.BOTTOM_CENTER);
         Button tmp;
+        getChildren().add(new Separator());
         getChildren().add(tmp = new Button("Add Drone"));
         tmp.setOnMouseClicked(addDrone);
+        getChildren().add(new Separator());
         getChildren().add(tmp = new Button("Add Turret"));
         tmp.setOnMouseClicked(addTurret);
+        getChildren().add(new Separator());
         getChildren().add(tmp = new Button("Clear Objects"));
         tmp.setOnMouseClicked(clear);
+        getChildren().add(new Separator());
         getChildren().add(tmp = new Button("Start"));
         tmp.setOnMouseClicked(start);
+        getChildren().add(new Separator());
         getChildren().add(tmp = new Button("Pause"));
         tmp.setOnMouseClicked(pause);
+        getChildren().add(new Separator());
     }
     /**
      * The 'AddDrone' button action handler
