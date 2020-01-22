@@ -28,7 +28,6 @@ public class ToolArea extends HBox {
 
     /**
      * The constructior
-     * @param engineFactory the AbstractEngineFactory object , used to manipulate the Database and PhysicsEngine objects
      */
     public ToolArea(AbstractGuiFactory guiFactory) {
         this.engineFactory = guiFactory.getEngineFactory();
@@ -83,8 +82,7 @@ public class ToolArea extends HBox {
     private EventHandler<MouseEvent> clear = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent mouseEvent) {
-            engineFactory.getDatabase().asList().clear();
-            engineFactory.getWorldMap().getData().clear();
+            engineFactory.getDatabase().clear();
             logger.info("Objects cleared");
         }
     };

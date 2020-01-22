@@ -1,5 +1,3 @@
-package tests;
-
 import logging.DefaultLogger;
 import logging.Logger;
 import tests.databaseSpec.DatabaseSpec;
@@ -12,7 +10,7 @@ import tests.worldSpec.WorldSpec;
 
 import java.util.ArrayList;
 
-public class Tests {
+public class TestsMain {
     public static ArrayList<Testable> components=new ArrayList<>();
 
     public static void main(String[] args) {

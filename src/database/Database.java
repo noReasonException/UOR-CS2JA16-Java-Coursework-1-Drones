@@ -65,9 +65,14 @@ public class Database implements Closeable {
      */
     public void fromList(List<AbstractObject> obj) {
         data.clear();
+        w.getData().clear();
         data.addAll(obj);
     }
 
+    public void clear(){
+        data.clear();
+        w.getData().clear();
+    }
 
 
     /**

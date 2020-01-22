@@ -51,7 +51,8 @@ public class WorldSpec implements Testable<World> {
                 collisionWithOtherDroneSpec()&&
                 collisionWithWallSpec()&&
                 nonCollisionWithWallSpec()&&
-                eraseObjectSpec();
+                eraseObjectSpec()&&
+                updatePositionSpec();
     }
 
     public boolean toWorldCoordinatesUntouched3rdDimensionSpec(){
@@ -157,6 +158,18 @@ public class WorldSpec implements Testable<World> {
             World d = genEntity();
             database.deleteObject(database.addDrone());
             return d.getData().size()==0;
+        }catch (EntityInitException e){
+            logger.error(e);
+            return false;
+        }
+    }
+    public boolean updatePositionSpec(){
+        try{
+            World d = genEntity();
+            AbstractObject o =database.addDrone();
+            Vector3 locationAfter=o.getPosition().add(new Vector3(100,100,100));
+            d.updatePosition(o,locationAfter);
+            return d.collisionWithAny(locationAfter);
         }catch (EntityInitException e){
             logger.error(e);
             return false;

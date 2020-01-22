@@ -89,8 +89,7 @@ public class GuiMenu extends MenuBar {
                 File path = WindowsUtils.genFileChooser();
                 if(path==null)return;
                 loaded = Serializer.fromFile(path.getAbsolutePath(),logger);
-                guiFactory.getEngineFactory().getDatabase().asList().clear();
-                guiFactory.getEngineFactory().getDatabase().asList().addAll(loaded);
+                guiFactory.getEngineFactory().getDatabase().fromList(loaded);
             }catch (IOException|ClassNotFoundException er){
                 new ErrorDuringSimulationSave(loader).display();
                 logger.error(er);
