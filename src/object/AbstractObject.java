@@ -37,7 +37,7 @@ abstract public class AbstractObject  implements Serializable {
     /**
      * Makes this object not visible
      * useful if a object has lost its lifes(a.k.a dies)
-     * @param visible
+     * @param visible true if it is visible , false otherwise
      */
     public void setVisible(boolean visible) {
         isVisible = visible;
@@ -118,7 +118,7 @@ abstract public class AbstractObject  implements Serializable {
      * The constructor
      *
      * @param position the position of the object
-     * @param direction the direction (0<=x<=360)
+     * @param direction the direction (between 0 - 360)
      * @param velocity the speed at pixels per frame
      * @param representation the image representing this object
      * @param randomUtills the randomUtills object

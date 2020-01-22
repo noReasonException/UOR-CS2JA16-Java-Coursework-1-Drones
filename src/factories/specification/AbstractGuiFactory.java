@@ -55,6 +55,11 @@ abstract public class AbstractGuiFactory implements Closeable {
      */
     abstract public GuiThread getGuiThread();
 
+    /**
+     * Terminates properly this objects lifetime
+     *
+     * @throws IOException if a stream fails to close properly(not used here)
+     */
     @Override
     public void close() throws IOException {
         System.out.println("Gui factory terminates itself");

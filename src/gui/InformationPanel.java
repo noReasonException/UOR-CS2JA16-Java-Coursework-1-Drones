@@ -72,18 +72,22 @@ public class InformationPanel extends ListView implements Closeable, Updateable 
         this.setHeight(this.getHeight() + 0.01);
     }
 
+    /**
+     * because this is not a canvas node , it needs to manually update it every couple of frames
+     */
     @Override
     public void update() {
-        //getChildren().clear();
         e.clear();
         for(AbstractObject b:database.asList()){
                 e.add(genEntry(b));
         }
-
-        //setItems(e);
-        //viewUpdate();
     }
 
+    /**
+     * Terminates properly this objects lifetime
+     *
+     * @throws IOException if a stream fails to close properly(not used here)
+     */
     @Override
     public void close() throws IOException {
         System.out.println("INformationPanel terminates itself , logs saved at log.txt");

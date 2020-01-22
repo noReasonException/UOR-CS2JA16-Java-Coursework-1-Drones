@@ -15,6 +15,10 @@ public class Turret extends AbstractObject {
     }
 
 
+    /**
+     *this event handler is called every time this object is hitting another object
+     * @return true if the last hit was resulted in the dead of the drone , false otherwise
+     */
     @Override
     public Function<FieldOfView, Boolean> collisionEventHandler() {
         return new Function<FieldOfView, Boolean>() {
@@ -25,7 +29,10 @@ public class Turret extends AbstractObject {
             }
         };
     }
-
+    /**
+     * this event handler is called every time the object doesnt hit anywhere
+     * @return true if this object want to fire a bullet , false otherwise
+     */
     @Override
     public Function<FieldOfView, Boolean> nonCollisionEventHandler() {
         if(Math.abs(rand.nextInt(1000000)) < 1000){

@@ -47,6 +47,11 @@ public class GuiMenu extends MenuBar {
 
     }
 
+    /**
+     * Generates a file menu , with the appropriate event handlers
+     * @return a newrly created file menu to be inserted into the menubar
+     *
+     */
     private Menu getFileMenu(){
         Menu b = new Menu("File");
         MenuItem m = new MenuItem("Exit");
@@ -54,13 +59,19 @@ public class GuiMenu extends MenuBar {
         m.setOnAction(e->{
             try {
                 guiFactory.close();
-            }catch (IOException er){
+                Thread.sleep(3000);
+                System.exit(0);
+            }catch (Exception er){
                 new ErrorDuringExitWindow(loader);
             }
 
         });
         return b;
     }
+    /**
+     *Generates a simulation menu , with the appropriate event handlers
+     * @return a newrly created Simulation menu to be inserted into the menubar
+     */
     private Menu getSimulationMenu(){
         Menu b = new Menu("Simulation");
 
@@ -101,7 +112,10 @@ public class GuiMenu extends MenuBar {
         });
         return b;
     }
-
+    /**
+     *Generates a log menu , with the appropriate event handlers
+     * @return a newrly created Log menu to be inserted into the menubar
+     */
     private Menu getLogMenu(){
         Menu b = new Menu("Logs");
         MenuItem save_logs = new MenuItem("Save Logs");
@@ -122,6 +136,10 @@ public class GuiMenu extends MenuBar {
 
         return b;
     }
+    /**
+     *Generates a help menu , with the appropriate event handlers
+     * @return a newrly created help menu to be inserted into the menubar
+     */
     private Menu getHelpMenu(){
         Menu b = new Menu("Help");
         MenuItem about = new MenuItem("About");

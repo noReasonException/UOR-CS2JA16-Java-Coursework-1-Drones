@@ -12,7 +12,6 @@ public class LogEntry extends HBox {
      * Generates a log enrtry
      * @param prefix the log prefix
      * @param msg the log message
-     * @return a Hbox to be added to the log list(into the observableList)
      */
     public LogEntry(String prefix, String msg) {
         this.prefix=prefix;

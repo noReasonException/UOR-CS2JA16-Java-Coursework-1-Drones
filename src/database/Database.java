@@ -37,17 +37,19 @@ public class Database implements Closeable {
     public Database(RandomUtills u, World w, Logger logger) {
         this.u = u;
         this.w = w;
-        this.logger=logger;
+        this.logger = logger;
     }
-    public void genDefaultDatabase(){
+
+    /**
+     * Generates a default Database
+     * (Used for the default arena)
+     */
+    public void genDefaultDatabase() {
         data.clear();
         addDrone();
         addDrone();
         addDrone();
     }
-
-
-
 
     /**
      * Returns the pure data
@@ -69,7 +71,10 @@ public class Database implements Closeable {
         data.addAll(obj);
     }
 
-    public void clear(){
+    /**
+     * Results in an empty Database object(useful in 'Clear drones' or 'Load' operations)
+     */
+    public void clear() {
         data.clear();
         w.getData().clear();
     }
@@ -98,6 +103,7 @@ public class Database implements Closeable {
 
         return addDrone(random.nextInt(360), ((double) random.nextInt(6)) / 10 + 0.1);
     }
+
     /**
      * Adds a turret into the system
      *
@@ -145,9 +151,14 @@ public class Database implements Closeable {
         w.eraseObject(b);
     }
 
+    /**
+     * Terminates properly this objects lifetime
+     *
+     * @throws IOException if a stream fails to close properly(not used here)
+     */
     @Override
     public void close() throws IOException {
         logger.info("Database object terminates itself");
-        //TODO save configuration
+        clear();
     }
 }

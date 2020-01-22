@@ -3,6 +3,9 @@ package gui.windows;
 import factories.ResourceLoader;
 import javafx.scene.image.Image;
 
+/**
+ * A simple about window
+ */
 public class AboutWindow extends AbstractInfoWindow {
 
     public AboutWindow(ResourceLoader loader) {

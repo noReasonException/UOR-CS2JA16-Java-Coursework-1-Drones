@@ -3,6 +3,9 @@ package gui.windows;
 import factories.ResourceLoader;
 import javafx.scene.image.Image;
 
+/***
+ * A simple help window providing useful tips to the user
+ */
 public class HelpWindow extends AbstractInfoWindow {
 
     public HelpWindow(ResourceLoader loader) {

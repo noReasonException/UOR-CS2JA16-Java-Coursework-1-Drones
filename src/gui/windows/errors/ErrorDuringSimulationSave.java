@@ -4,6 +4,9 @@ import factories.ResourceLoader;
 import gui.windows.AbstractInfoWindow;
 import javafx.scene.image.Image;
 
+/***
+ * An error displayed in case of any error during the save of simulation procedure
+ */
 public class ErrorDuringSimulationSave extends AbstractInfoWindow {
     public ErrorDuringSimulationSave(ResourceLoader loader) {
         super(loader);

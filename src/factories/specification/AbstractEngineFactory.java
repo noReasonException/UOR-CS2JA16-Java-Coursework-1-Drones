@@ -61,7 +61,11 @@ abstract public class AbstractEngineFactory implements Closeable {
     public Logger getLogger() { return logger==null?logger=new DefaultLogger():logger; }
 
     public void setLogger(Logger logger) { this.logger = logger; }
-
+    /**
+     * Terminates properly this objects lifetime
+     *
+     * @throws IOException if a stream fails to close properly(not used here)
+     */
     @Override
     public void close() throws IOException {
         getDatabase().close();

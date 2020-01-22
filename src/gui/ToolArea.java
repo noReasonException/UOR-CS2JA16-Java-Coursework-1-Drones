@@ -26,9 +26,6 @@ public class ToolArea extends HBox {
         this.logger = logger;
     }
 
-    /**
-     * The constructior
-     */
     public ToolArea(AbstractGuiFactory guiFactory) {
         this.engineFactory = guiFactory.getEngineFactory();
         this.guiFactory = guiFactory;

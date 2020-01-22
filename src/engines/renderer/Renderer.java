@@ -115,6 +115,11 @@ public class Renderer extends AnimationTimer implements Closeable {
 
     }
 
+    /**
+     * Terminates properly this objects lifetime
+     *
+     * @throws IOException if a stream fails to close properly(not used here)
+     */
     @Override
     public void close() throws IOException {
         this.logger.info("Renderer Thread terminates itself ");

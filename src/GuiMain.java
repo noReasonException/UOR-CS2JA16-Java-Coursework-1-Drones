@@ -19,6 +19,7 @@ import java.io.FileNotFoundException;
 public class GuiMain extends Application {
     /**
      * the main method , launches the application
+     *
      * @param args the systems args(not used)
      */
     public static void main(String[] args) {
@@ -78,6 +79,7 @@ public class GuiMain extends Application {
 
     /**
      * The GuiMain main entry point.
+     *
      * @param theStage the javafx pre-initialized stage
      */
     @Override

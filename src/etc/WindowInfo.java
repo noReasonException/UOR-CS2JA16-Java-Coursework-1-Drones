@@ -58,6 +58,11 @@ public class WindowInfo implements Serializable {
         this.windowY = windowY;
     }
 
+    /***
+     * Creates the optimal and well tested WindowInfo object
+     * it is not guaranteed to run smoothly if alternative object is used
+     * @return a newrly created WindowInfo
+     */
     public static WindowInfo genDefault(){
         return  new WindowInfo(50, 50, 500, 500);
     }

@@ -42,12 +42,24 @@ public class GuiFactory extends AbstractGuiFactory {
     @Override
     public AbstractEngineFactory getEngineFactory() {return super.engineFactory==null?(super.engineFactory=new EngineFactory(this.windowInfo,this.loader)):super.engineFactory;}
 
+    /**
+     * Creates a singleton instance of GuiMenu
+     * @return a singleton GuiMenu Object
+     */
     @Override
     public GuiMenu getGuiMenu() { return menu==null?menu=new GuiMenu(this,loader):menu; }
 
+    /**
+     * Creates a singleton instance of InformationPanel
+     * @return a singleton InformationPanel Object
+     */
     @Override
     public InformationPanel getInformationPanel() { return super.informationPanel==null?informationPanel=new InformationPanel(getEngineFactory().getDatabase(),loader):super.informationPanel; }
 
+    /**
+     * Creates a singleton instance of GuiThread
+     * @return a singleton GuiThread Object
+     */
     @Override
     public GuiThread getGuiThread() {
         return super.guiThread==null?guiThread=new GuiThread(getInformationPanel()):guiThread;

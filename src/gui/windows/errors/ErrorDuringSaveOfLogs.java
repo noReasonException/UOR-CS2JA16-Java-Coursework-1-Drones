@@ -4,6 +4,9 @@ import factories.ResourceLoader;
 import gui.windows.AbstractInfoWindow;
 import javafx.scene.image.Image;
 
+/***
+ * An error displayed in case of any error during the save of logs procedure
+ */
 public class ErrorDuringSaveOfLogs extends AbstractInfoWindow {
     public ErrorDuringSaveOfLogs(ResourceLoader loader) {
         super(loader);

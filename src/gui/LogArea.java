@@ -76,6 +76,11 @@ public class LogArea extends ListView implements Logger , Closeable {
         update();
     }
 
+    /**
+     * Terminates properly this objects lifetime
+     *
+     * @throws IOException if a stream fails to close properly(not used here)
+     */
     @Override
     public void close() throws IOException {
         System.out.println("LogArea terminates itself , logs saved at log.txt");

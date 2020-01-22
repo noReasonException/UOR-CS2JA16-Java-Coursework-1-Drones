@@ -3,7 +3,9 @@ package gui.windows.success;
 import factories.ResourceLoader;
 import gui.windows.AbstractInfoWindow;
 import javafx.scene.image.Image;
-
+/***
+ * An error displayed when the logs has been saved successfully
+ */
 public class LogsSavedInfoWindow extends AbstractInfoWindow {
 
     private String filepath;

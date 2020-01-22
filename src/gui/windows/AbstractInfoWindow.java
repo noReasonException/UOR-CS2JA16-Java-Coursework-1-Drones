@@ -15,10 +15,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
+/**
+ * This class represent an generic feedback window , providing useful information to the user
+ */
 abstract public class AbstractInfoWindow {
-
-
-
     protected ResourceLoader loader;
 
     Stage stage=new Stage();
@@ -27,10 +27,27 @@ abstract public class AbstractInfoWindow {
         this.loader=loader;
     }
 
+    /**
+     *
+     * @return the left image object
+     */
     abstract protected Image getLeftImage();
+
+    /**
+     *
+     * @return the title
+     */
     abstract protected String getTitle();
+
+    /**
+     *
+     * @return the main text
+     */
     abstract protected String getText();
 
+    /***
+     * Triggers the window
+     */
     public void display()
     {
 
