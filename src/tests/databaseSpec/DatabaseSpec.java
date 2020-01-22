@@ -12,6 +12,10 @@ import object.AbstractObject;
 import tests.etc.EntityInitException;
 import tests.etc.Testable;
 
+/**
+ * This is the Database object tests
+ * @see Database
+ */
 public class DatabaseSpec implements Testable<Database> {
     Logger logger;
 
@@ -19,6 +23,11 @@ public class DatabaseSpec implements Testable<Database> {
         this.logger = logger;
     }
 
+    /**
+     * Generate a new entity
+     * @return a newrly created entity
+     * @throws EntityInitException in case of any error
+     */
     @Override
     public Database genEntity() throws EntityInitException {
         try{
@@ -32,6 +41,10 @@ public class DatabaseSpec implements Testable<Database> {
         }
     }
 
+    /**
+     * Run all tests regarding this entity
+     * @return true if all tests has been succeed;
+     */
     @Override
     public boolean test() {
         return genDefaultDatabaseSpec()&&
@@ -41,6 +54,11 @@ public class DatabaseSpec implements Testable<Database> {
                 deleteObjectSpec();
     }
 
+    /**
+     * Tests the ability to generate a default database
+     * used in default arena
+     * @return true if the test succeeds
+     */
     public boolean genDefaultDatabaseSpec(){
         try{
             Database d = genEntity();
@@ -52,6 +70,11 @@ public class DatabaseSpec implements Testable<Database> {
         }
 
     }
+
+    /**
+     * Tests the ability of database in adding a drone
+     * @return true if the test succeeds
+     */
     public boolean addDroneSpec() {
         try {
             Database d = genEntity();
@@ -63,6 +86,10 @@ public class DatabaseSpec implements Testable<Database> {
             return false;
         }
     }
+    /**
+     * Tests the ability of database in adding a turret
+     * @return true if the test succeeds
+     */
     public boolean addTurretSpec() {
         try {
             Database d = genEntity();
@@ -74,6 +101,10 @@ public class DatabaseSpec implements Testable<Database> {
             return false;
         }
     }
+    /**
+     * Tests the ability of database in adding a bullet
+     * @return true if the test succeeds
+     */
     public boolean newBulletSpec() {
         try {
             Database d = genEntity();
@@ -86,6 +117,10 @@ public class DatabaseSpec implements Testable<Database> {
             return false;
         }
     }
+    /**
+     * Tests the ability of database in deleting a object
+     * @return true if the test succeeds
+     */
     public boolean deleteObjectSpec() {
         try {
             Database d = genEntity();

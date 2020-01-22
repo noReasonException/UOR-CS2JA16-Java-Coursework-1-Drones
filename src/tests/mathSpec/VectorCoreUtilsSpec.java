@@ -21,22 +21,38 @@ public class VectorCoreUtilsSpec implements Testable<VectorCoreUtils> {
         this.logger = logger;
     }
 
+    /**
+     * Generate a new entity
+     * @return a newrly created entity
+     * @throws EntityInitException in case of any error
+     */
     @Override
     public VectorCoreUtils genEntity() throws EntityInitException {
         return new VectorCoreUtils();
     }
 
+    /**
+     * Run all tests regarding this entity
+     * @return true if all tests has been succeed;
+     */
     @Override
     public boolean test() {
         return lengthSpec()&&dotProductSpec();
     }
 
+    /**
+     * tests if the length method returns proper results
+     * @return true if the test succeeds
+     */
     public boolean lengthSpec(){
         Vector2 vector2=new Vector2(5,5);
         return VectorCoreUtils.length(vector2.getCore().getData()) == Math.sqrt(50);
     }
 
-
+    /**
+     * tests if the dot product method returns proper results
+     * @return true if the test succeeds
+     */
     public boolean dotProductSpec(){
         Vector2 vector21=new Vector2(1,1);
         Vector2 vector22=new Vector2(1,1);

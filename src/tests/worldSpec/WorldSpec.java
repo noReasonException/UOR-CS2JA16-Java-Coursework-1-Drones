@@ -25,6 +25,11 @@ public class WorldSpec implements Testable<World> {
         this.logger = logger;
     }
 
+    /**
+     * Generate a new entity
+     * @return a newrly created entity
+     * @throws EntityInitException in case of any error
+     */
     @Override
     public World genEntity() throws EntityInitException {
         try{
@@ -40,6 +45,10 @@ public class WorldSpec implements Testable<World> {
         }
     }
 
+    /**
+     * Run all tests regarding this entity
+     * @return true if all tests has been succeed;
+     */
     @Override
     public boolean test() {
         return toWorldCoordinatesUntouched3rdDimensionSpec()&&
@@ -55,6 +64,10 @@ public class WorldSpec implements Testable<World> {
                 updatePositionSpec();
     }
 
+    /**
+     * tests if the the .toWorldCoordinates modifies the 3rd dimension(height)
+     * @return true if the test succeeds
+     */
     public boolean toWorldCoordinatesUntouched3rdDimensionSpec(){
         try{
             World d = genEntity();
@@ -66,6 +79,10 @@ public class WorldSpec implements Testable<World> {
             return false;
         }
     }
+    /**
+     * tests if the .toWorldCoordinates method returns proper results
+     * @return true if the test succeeds
+     */
     public boolean toWorldCoordinatesProperDivisionSpec(){
         try{
             World d = genEntity();
@@ -78,6 +95,10 @@ public class WorldSpec implements Testable<World> {
             return false;
         }
     }
+    /**
+     * tests if the collision system works
+     * @return true if the test succeeds
+     */
     public boolean collisionWithAnySpec(){
         try{
             World d = genEntity();
@@ -89,6 +110,10 @@ public class WorldSpec implements Testable<World> {
             return false;
         }
     }
+    /**
+     * tests if the collision system works
+     * @return true if the test succeeds
+     */
     public boolean collisionSpec(){
         try{
             World d = genEntity();
@@ -100,6 +125,10 @@ public class WorldSpec implements Testable<World> {
             return false;
         }
     }
+    /**
+     * tests if the collision system works
+     * @return true if the test succeeds
+     */
     public boolean collisionWithAnyNonCollisionSpec(){
         try{
             World d = genEntity();
@@ -111,6 +140,10 @@ public class WorldSpec implements Testable<World> {
             return false;
         }
     }
+    /**
+     * tests if the collision system works
+     * @return true if the test succeeds
+     */
     public boolean collisionNonCollisionSpec(){
         try{
             World d = genEntity();
@@ -122,6 +155,10 @@ public class WorldSpec implements Testable<World> {
             return false;
         }
     }
+    /**
+     * tests if the collision system works
+     * @return true if the test succeeds
+     */
     public boolean collisionWithOtherDroneSpec(){
         try{
             World d = genEntity();
@@ -133,6 +170,10 @@ public class WorldSpec implements Testable<World> {
             return false;
         }
     }
+    /**
+     * tests if the collision system works
+     * @return true if the test succeeds
+     */
     public boolean collisionWithWallSpec(){
         try{
             World d = genEntity();
@@ -143,6 +184,10 @@ public class WorldSpec implements Testable<World> {
             return false;
         }
     }
+    /**
+     * tests if the collision system works
+     * @return true if the test succeeds
+     */
     public boolean nonCollisionWithWallSpec(){
         try{
             World d = genEntity();
@@ -153,6 +198,10 @@ public class WorldSpec implements Testable<World> {
             return false;
         }
     }
+    /**
+     * tests if the eraseObject method returns performs as requested
+     * @return true if the test succeeds
+     */
     public boolean eraseObjectSpec(){
         try{
             World d = genEntity();
@@ -163,6 +212,10 @@ public class WorldSpec implements Testable<World> {
             return false;
         }
     }
+    /**
+     * tests if the .updatePosition method performs as requested
+     * @return true if the test succeeds
+     */
     public boolean updatePositionSpec(){
         try{
             World d = genEntity();

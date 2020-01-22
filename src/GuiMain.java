@@ -65,6 +65,7 @@ public class GuiMain extends Application {
         this.guiFactory.getToolArea().setLogger(guiFactory.getLogArea());
         this.guiFactory.getGuiMenu().setLogger(guiFactory.getLogArea());
         this.loader.setLogger(guiFactory.getLogArea());
+
     }
 
     /**
