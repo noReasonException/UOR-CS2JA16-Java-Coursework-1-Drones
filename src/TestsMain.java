@@ -10,9 +10,20 @@ import tests.worldSpec.WorldSpec;
 
 import java.util.ArrayList;
 
+/**
+ * The type Tests main.
+ */
 public class TestsMain {
+    /**
+     * The constant components.
+     */
     public static ArrayList<Testable> components=new ArrayList<>();
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         Logger logger=new DefaultLogger();
         components.add(new DatabaseSpec(logger));
