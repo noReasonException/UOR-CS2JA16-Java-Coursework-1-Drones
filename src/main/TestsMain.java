@@ -1,3 +1,4 @@
+package main;
 import logging.DefaultLogger;
 import logging.Logger;
 import tests.databaseSpec.DatabaseSpec;

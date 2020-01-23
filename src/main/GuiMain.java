@@ -1,3 +1,4 @@
+package main;
 
 import etc.WindowInfo;
 import factories.EngineFactory;
